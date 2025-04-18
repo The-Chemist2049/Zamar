@@ -1,0 +1,415 @@
+/* ZamarBrandingPage.css */
+.branding-page {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #333;
+  }
+  
+  /* Hero Section */
+  .branding-hero {
+    background: linear-gradient(rgba(26, 77, 128, 0.85), rgba(26, 77, 128, 0.85)), url('/branding/hero-bg.jpg');
+    background-size: cover;
+    background-position: center;
+    height: 400px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: white;
+  }
+  
+  .branding-hero-content {
+    max-width: 800px;
+    padding: 0 20px;
+  }
+  
+  .branding-hero h1 {
+    font-size: 42px;
+    font-weight: 700;
+    margin-bottom: 15px;
+  }
+  
+  .branding-hero p {
+    font-size: 20px;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  
+  /* Services Section */
+  .branding-services {
+    padding: 80px 0;
+    background-color: #f8f9fa;
+  }
+  
+  .services-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+  
+  .services-header {
+    text-align: center;
+    margin-bottom: 50px;
+  }
+  
+  .services-header h2 {
+    font-size: 32px;
+    color: #1a4d80;
+    margin-bottom: 15px;
+  }
+  
+  .services-header p {
+    font-size: 18px;
+    color: #666;
+    max-width: 700px;
+    margin: 0 auto;
+  }
+  
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 30px;
+  }
+  
+  .service-card {
+    background-color: white;
+    border-radius: 8px;
+    padding: 30px;
+    text-align: center;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+    transition: transform 0.3s ease;
+  }
+  
+  .service-card:hover {
+    transform: translateY(-5px);
+  }
+  
+  .service-icon {
+    width: 70px;
+    height: 70px;
+    margin: 0 auto 20px;
+    background-color: #e7f1fa;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 35px;
+  }
+  
+  .service-card h3 {
+    font-size: 20px;
+    color: #1a4d80;
+    margin-bottom: 15px;
+  }
+  
+  .service-card p {
+    font-size: 15px;
+    color: #666;
+    line-height: 1.6;
+  }
+  
+  /* Branding Process Section */
+  .branding-process {
+    padding: 80px 0;
+  }
+  
+  .process-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+  
+  .process-header {
+    text-align: center;
+    margin-bottom: 50px;
+  }
+  
+  .process-header h2 {
+    font-size: 32px;
+    color: #1a4d80;
+    margin-bottom: 15px;
+  }
+  
+  .process-header p {
+    font-size: 18px;
+    color: #666;
+  }
+  
+  .process-steps {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 30px;
+  }
+  
+  .process-step {
+    flex: 1;
+    min-width: 200px;
+    text-align: center;
+    padding: 20px;
+  }
+  
+  .step-number {
+    width: 50px;
+    height: 50px;
+    background-color: #1a4d80;
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    font-weight: 700;
+    margin: 0 auto 15px;
+  }
+  
+  .process-step h3 {
+    font-size: 20px;
+    color: #1a4d80;
+    margin-bottom: 10px;
+  }
+  
+  .process-step p {
+    font-size: 15px;
+    color: #666;
+    line-height: 1.6;
+  }
+  
+  /* Portfolio Section */
+  .branding-portfolio {
+    padding: 80px 0;
+    background-color: #f8f9fa;
+  }
+  
+  .portfolio-header {
+    text-align: center;
+    margin-bottom: 40px;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0 20px;
+  }
+  
+  .portfolio-header h2 {
+    font-size: 32px;
+    color: #1a4d80;
+    margin-bottom: 15px;
+  }
+  
+  .portfolio-header p {
+    font-size: 18px;
+    color: #666;
+  }
+  
+  .portfolio-tabs {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 30px;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0 20px;
+  }
+  
+  .portfolio-tabs button {
+    background-color: transparent;
+    border: none;
+    padding: 10px 18px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+    color: #555;
+  }
+  
+  .portfolio-tabs button:hover {
+    color: #1a4d80;
+  }
+  
+  .portfolio-tabs button.active {
+    background-color: #1a4d80;
+    color: white;
+  }
+  
+  .portfolio-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 30px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+  
+  .portfolio-card {
+    background-color: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+  }
+  
+  .portfolio-image {
+    position: relative;
+    height: 250px;
+    overflow: hidden;
+  }
+  
+  .portfolio-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+  }
+  
+  .portfolio-card:hover .portfolio-image img {
+    transform: scale(1.1);
+  }
+  
+  .portfolio-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(26, 77, 128, 0.85);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+  
+  .portfolio-card:hover .portfolio-overlay {
+    opacity: 1;
+  }
+  
+  .overlay-content {
+    color: white;
+    text-align: center;
+  }
+  
+  .project-category {
+    display: inline-block;
+    background-color: #e74c3c;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 3px;
+    font-size: 12px;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+  
+  .overlay-content p {
+    font-size: 14px;
+    line-height: 1.6;
+  }
+  
+  .portfolio-info {
+    padding: 20px;
+  }
+  
+  .portfolio-info h3 {
+    font-size: 18px;
+    color: #1a4d80;
+    margin-bottom: 10px;
+  }
+  
+  .project-meta {
+    display: flex;
+    justify-content: space-between;
+    font-size: 14px;
+    color: #666;
+  }
+  
+  /* CTA Section */
+  .branding-cta {
+    background-color: #1a4d80;
+    color: white;
+    text-align: center;
+    padding: 80px 20px;
+  }
+  
+  .branding-cta h2 {
+    font-size: 32px;
+    margin-bottom: 15px;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  .branding-cta p {
+    font-size: 18px;
+    margin-bottom: 30px;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  .cta-button {
+    background-color: #e74c3c;
+    color: white;
+    border: none;
+    padding: 12px 30px;
+    font-size: 18px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .cta-button:hover {
+    background-color: #c0392b;
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 900px) {
+    .branding-hero h1 {
+      font-size: 36px;
+    }
+    
+    .branding-hero p {
+      font-size: 18px;
+    }
+    
+    .process-steps {
+      flex-direction: column;
+      max-width: 500px;
+      margin: 0 auto;
+    }
+    
+    .portfolio-grid {
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    }
+  }
+  
+  @media (max-width: 600px) {
+    .branding-hero {
+      height: 300px;
+    }
+    
+    .branding-hero h1 {
+      font-size: 28px;
+    }
+    
+    .branding-hero p {
+      font-size: 16px;
+    }
+    
+    .services-header h2,
+    .process-header h2,
+    .portfolio-header h2,
+    .branding-cta h2 {
+      font-size: 26px;
+    }
+    
+    .portfolio-tabs button {
+      padding: 8px 12px;
+      font-size: 14px;
+    }
+    
+    .portfolio-grid {
+      grid-template-columns: 1fr;
+    }
+  }
