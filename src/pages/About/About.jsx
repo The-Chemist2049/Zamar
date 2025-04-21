@@ -38,14 +38,14 @@ const About = () => {
                 that bring brands to life and drive tangible results.
               </p>
               <a
-                href={companyProfile}
-                download="Zamar_Solutions_Company_Profile.pdf"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="button1"
-              >
-                Company Profile
-              </a>
+  href={companyProfile}
+  target="_blank"
+  rel="noopener noreferrer"
+  className="button1"
+>
+  Company Profile
+</a>
+
             </div>
             <div className="company-image">
               <img src={aboutCompanyImage} alt="Zamar Solutions Team" />

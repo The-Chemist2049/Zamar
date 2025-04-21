@@ -1,27 +1,29 @@
 .services-hero {
-    background-color: #222;
-    color: white;
-    padding: 8rem 0 4rem;
-    text-align: center;
-    margin-top: 70px;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  color: white;
+  padding: 8rem 0 4rem;
+  text-align: center;
+  margin-top: 70px;
+  min-height: 550px; /* Increased from 600px */
+}
+
+
+/* Responsive adjustment for screens 1024px and below */
+@media (max-width: 1024px) {
+  .services-hero {
+    padding: 135px 40px 135px 40px;
   }
+}
+
   
-  .services-hero h1 {
-    font-size: 3.5rem;
-    margin-bottom: 1rem;
-  }
-  
-  .services-hero p {
-    font-size: 1.2rem;
-    opacity: 0.9;
-    max-width: 600px;
-    margin: 0 auto;
-  }
   
   .services-main .services-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 2rem;
+    border-radius: 1px;
   }
   
   .service-process {
@@ -38,7 +40,7 @@
     text-align: center;
     padding: 2rem;
     background-color: white;
-    border-radius: 8px;
+    border-radius: 1px;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
   }
   
