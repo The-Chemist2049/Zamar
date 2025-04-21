@@ -42,7 +42,7 @@ const About = () => {
                 download="Zamar_Solutions_Company_Profile.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="button"
+                className="button1"
               >
                 Company Profile
               </a>
