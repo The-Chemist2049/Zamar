@@ -18,7 +18,7 @@ const HeroSection = () => {
 
   const rgbToArray = (hex) => {
     const r = parseInt(hex.slice(1, 3), 16);
-    const g = parseInt(hex.slice(3, 5), 16);
+    const g = parseInt(hex.slice(3, 5), 3e16);
     const b = parseInt(hex.slice(5, 7), 16);
     return [r, g, b];
   };
@@ -131,18 +131,19 @@ const HeroSection = () => {
 
               {/* 3D Image Carousel */}
               <div className="col-md-4 text-center">
-                <div className="carousel-3d-wrapper" role="region" aria-label="3D branding showcase carousel">
-                  <div className="carousel-3d" id="carousel" ref={carouselRef}>
-                    <img src="1.jpg" alt="3D branding concept for product display" loading="lazy" />
-                    <img src="2.jpg" alt="Branded vehicle for outdoor campaign" loading="lazy" />
-                    <img src="3.jpg" alt="Outdoor advertising campaign" loading="lazy" />
-                    <img src="4.jpg" alt="Instore branding setup" loading="lazy" />
-                    <img src="5.jpg" alt="Event activation display" loading="lazy" />
-                    <img src="6.jpg" alt="Point-of-sale display" loading="lazy" />
-                    <img src="7.jpg" alt="Creative branding installation" loading="lazy" />
-                    <img src="8.jpg" alt="Team executing branding project" loading="lazy" />
-                  </div>
-                </div>
+              <div className="carousel-3d-wrapper" role="region" aria-label="3D branding showcase carousel">
+  <div className="carousel-3d" id="carousel" ref={carouselRef}>
+    <img src="src/assets/images/1.jpg" alt="3D branding concept for product display" loading="lazy" />
+    <img src="src/assets/images/2.jpg" alt="Branded vehicle for outdoor campaign" loading="lazy" />
+    <img src="src/assets/images/3.jpg" alt="Outdoor advertising campaign" loading="lazy" />
+    <img src="src/assets/images/4.jpg" alt="Instore branding setup" loading="lazy" />
+    <img src="src/assets/images/5.jpg" alt="Event activation display" loading="lazy" />
+    <img src="src/assets/images/6.jpg" alt="Point-of-sale display" loading="lazy" />
+    <img src="src/assets/images/7.jpg" alt="Creative branding installation" loading="lazy" />
+    <img src="src/assets/images/8.jpg" alt="Team executing branding project" loading="lazy" />
+  </div>
+</div>
+
               </div>
             </div>
           </div>
