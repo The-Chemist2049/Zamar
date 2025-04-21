@@ -1,187 +1,143 @@
-import React, { useState } from 'react';
-import './Contact.css';
+import React from "react";
+import "./Contact.css";
+import { Mail, Phone, Globe } from "lucide-react";
+import { motion } from "framer-motion";
 
 const Contact = () => {
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    phone: '',
-    company: '',
-    message: ''
-  });
-  
-  const [submitted, setSubmitted] = useState(false);
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData(prevState => ({
-      ...prevState,
-      [name]: value
-    }));
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // Here you would typically send the form data to a server
-    console.log('Form submitted:', formData);
-    setSubmitted(true);
-    // Reset form after submission
-    setFormData({
-      name: '',
-      email: '',
-      phone: '',
-      company: '',
-      message: ''
-    });
-    
-    // Reset submission message after 5 seconds
-    setTimeout(() => {
-      setSubmitted(false);
-    }, 5000);
-  };
-
   return (
-    <div className="contact-container">
-      <div className="contact-header">
-        <h1>Contact Us</h1>
-        <p>Reach out to us for all your brand activation and marketing needs</p>
-      </div>
-      
-      <div className="contact-content">
-        <div className="contact-info">
-          <div className="info-card">
-            <div className="info-icon">
-              <i className="fas fa-map-marker-alt"></i>
-            </div>
-            <h3>Our Office</h3>
-            <p>Nairobi, Kenya</p>
-          </div>
-          
-          <div className="info-card">
-            <div className="info-icon">
-              <i className="fas fa-phone"></i>
-            </div>
-            <h3>Phone</h3>
-            <p>+254 724 679 202</p>
-            <p>+254 750 082 211</p>
-          </div>
-          
-          <div className="info-card">
-            <div className="info-icon">
-              <i className="fas fa-envelope"></i>
-            </div>
-            <h3>Email</h3>
-            <p>sales@zamarsolutions.co.ke</p>
-            <p>marketing@zamarsolutions.co.ke</p>
-          </div>
-          
-          <div className="info-card">
-            <div className="info-icon">
-              <i className="fas fa-globe"></i>
-            </div>
-            <h3>Website</h3>
-            <p>www.zamarsolutions.co.ke</p>
-          </div>
-        </div>
-        
-        <div className="contact-form">
+    <motion.div
+      className="zamar-contact"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.6 }}
+    >
+      {/* Header */}
+      <motion.header
+        className="zamar-header"
+        initial={{ y: -30, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 0.8 }}
+      >
+        <h1>Let's Connect</h1>
+        <p>
+          We're excited to hear from you. Send us a message or give us a call!
+        </p>
+      </motion.header>
+
+      {/* Content Grid */}
+      <div className="zamar-grid">
+        {/* Contact Form */}
+        <motion.form
+          className="zamar-form"
+          initial={{ x: -50, opacity: 0 }}
+          animate={{ x: 0, opacity: 1 }}
+          transition={{ delay: 0.3, duration: 0.8 }}
+        >
           <h2>Send Us a Message</h2>
-          {submitted && <div className="success-message">Thank you for your message! We'll get back to you soon.</div>}
-          <form onSubmit={handleSubmit}>
-            <div className="form-group">
-              <label htmlFor="name">Full Name</label>
-              <input
-                type="text"
-                id="name"
-                name="name"
-                value={formData.name}
-                onChange={handleChange}
-                required
-              />
+          <div className="form-field">
+            <label>Full Name</label>
+            <input type="text" placeholder="Enter your name" required />
+          </div>
+          <div className="form-field">
+            <label>Email Address</label>
+            <input type="email" placeholder="you@example.com" required />
+          </div>
+          <div className="form-field">
+            <label>Your Message</label>
+            <textarea
+              rows="6"
+              placeholder="Write your message here..."
+              required
+            ></textarea>
+          </div>
+          <motion.button
+            type="submit"
+            whileHover={{ scale: 1.03 }}
+            whileTap={{ scale: 0.97 }}
+            transition={{ type: "spring", stiffness: 300 }}
+          >
+            Submit
+          </motion.button>
+        </motion.form>
+
+        {/* Contact Info + Map */}
+        <motion.div
+          className="zamar-info-box"
+          initial={{ x: 50, opacity: 0 }}
+          animate={{ x: 0, opacity: 1 }}
+          transition={{ delay: 0.5, duration: 0.8 }}
+        >
+          <h2>Contact Details</h2>
+
+          <motion.div className="zamar-info-item" whileHover={{ scale: 1.01 }}>
+            <Phone className="icon" />
+            <div>
+              <p>
+                <strong>Call Us</strong>
+              </p>
+              <p>
+                +254 724 679 202
+                <br />
+                +254 750 082 211
+              </p>
             </div>
-            
-            <div className="form-group">
-              <label htmlFor="email">Email Address</label>
-              <input
-                type="email"
-                id="email"
-                name="email"
-                value={formData.email}
-                onChange={handleChange}
-                required
-              />
+          </motion.div>
+
+          <motion.div className="zamar-info-item" whileHover={{ scale: 1.01 }}>
+            <Mail className="icon" />
+            <div>
+              <p>
+                <strong>Email</strong>
+              </p>
+              <p>
+                <a href="mailto:sales@zamarsolutions.co.ke">
+                  sales@zamarsolutions.co.ke
+                </a>
+                <br />
+                <a href="mailto:marketing@zamarsolutions.co.ke">
+                  marketing@zamarsolutions.co.ke
+                </a>
+              </p>
             </div>
-            
-            <div className="form-group">
-              <label htmlFor="phone">Phone Number</label>
-              <input
-                type="tel"
-                id="phone"
-                name="phone"
-                value={formData.phone}
-                onChange={handleChange}
-              />
+          </motion.div>
+
+          <motion.div className="zamar-info-item" whileHover={{ scale: 1.01 }}>
+            <Globe className="icon" />
+            <div>
+              <p>
+                <strong>Website</strong>
+              </p>
+              <a
+                href="https://www.zamarsolutions.co.ke"
+                target="_blank"
+                rel="noreferrer"
+              >
+                www.zamarsolutions.co.ke
+              </a>
             </div>
-            
-            <div className="form-group">
-              <label htmlFor="company">Company Name</label>
-              <input
-                type="text"
-                id="company"
-                name="company"
-                value={formData.company}
-                onChange={handleChange}
-              />
-            </div>
-            
-            <div className="form-group">
-              <label htmlFor="message">Message</label>
-              <textarea
-                id="message"
-                name="message"
-                rows="5"
-                value={formData.message}
-                onChange={handleChange}
-                required
-              ></textarea>
-            </div>
-            
-            <button type="submit" className="submit-btn">Send Message</button>
-          </form>
-        </div>
+          </motion.div>
+
+          {/* Map */}
+          <motion.div
+            className="zamar-map"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 1, duration: 1 }}
+          >
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3988.7615573288426!2d36.832766624965785!3d-1.3187408486687486!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x182f11b005f6a0ab%3A0x22bcff8d667d8146!2sRamco%20Courts%2C%20Nairobi!5e0!3m2!1sen!2ske!4v1745245750384!5m2!1sen!2ske"
+              width="100%"
+              height="300"
+              style={{ border: 0, borderRadius: "16px" }}
+              allowFullScreen=""
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              title="Zamar Location - Ramco Courts"
+            ></iframe>
+          </motion.div>
+        </motion.div>
       </div>
-      
-      <div className="map-container">
-        <h2>Find Us</h2>
-        <div className="map-placeholder">
-          <p>Map will be embedded here</p>
-          {/* You would typically use Google Maps or another map service here */}
-          {/* Example: <iframe src="https://www.google.com/maps/embed?..."></iframe> */}
-        </div>
-      </div>
-      
-      <div className="services-overview">
-        <h2>Our Services</h2>
-        <div className="services-grid">
-          <div className="service-item">
-            <h3>Brand Activations</h3>
-            <p>Strategic consulting, retail marketing, trade marketing, roadshows, and more</p>
-          </div>
-          <div className="service-item">
-            <h3>Design & Printing</h3>
-            <p>Wall branding, vehicle branding, promotional items, and signage solutions</p>
-          </div>
-          <div className="service-item">
-            <h3>In-store Marketing</h3>
-            <p>Category branding, merchandising, and promotional displays</p>
-          </div>
-          <div className="service-item">
-            <h3>Outdoor Advertising</h3>
-            <p>Billboards, hoardings, and special advertising installations</p>
-          </div>
-        </div>
-      </div>
-    </div>
+    </motion.div>
   );
 };
 

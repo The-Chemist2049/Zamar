@@ -1,0 +1,73 @@
+.project-loading-container {
+  display: flex;
+  flex-wrap: wrap;
+  min-height: calc(100vh - 70px);
+  gap: 1rem;
+  width: 95%;
+  margin: auto;
+}
+
+.project-loading-sidebar {
+  min-width: 250px;
+  background-color: white;
+  width: 100%;
+  max-width: fit-content;
+  height: 100%;
+  position: sticky;
+  top: 75px;
+  border-radius: 0.5rem;
+  padding: 1.25rem;
+}
+
+.category-section {
+  width: 100%;
+  display: grid;
+  gap: 0.5rem;
+  transition: all 0.3s;
+}
+
+.category-skeletons {
+  display: grid;
+  gap: 0.5rem;
+  width: 100%;
+}
+
+.category-skeleton {
+  width: 100%;
+  height: 40px;
+  border-radius: 9999px;
+}
+
+.project-loading-main {
+  flex: 1;
+  padding: 1rem;
+  overflow-y: auto;
+  display: grid;
+  gap: 1rem;
+}
+
+.project-section {
+  width: 100%;
+  display: grid;
+  gap: 0.5rem;
+  grid-auto-rows: max-content;
+}
+
+.project-title-skeleton {
+  width: 50%;
+  max-width: 33%;
+  height: 30px;
+}
+
+.project-images-skeletons {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.image-skeleton {
+  flex: 1 1 calc(25% - 0.5rem);
+  height: 30vh;
+  min-width: 100px;
+}

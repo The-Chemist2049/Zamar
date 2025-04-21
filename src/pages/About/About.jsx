@@ -1,40 +1,64 @@
-import React from 'react';
-import './About.css';
+import React from "react";
+import "../../index.css";
+import "./About.css";
+import aboutImage from "../../assets/images/nairobi.jpg";
+import aboutCompanyImage from "../../assets/images/company.jpg";
+import teamPlaceholderImage from "../../assets/images/team.jpg";
+import teamPlaceholderImage1 from "../../assets/images/team1.jpg";
+import teamPlaceholderImage2 from "../../assets/images/team2.jpg";
+import companyProfile from "../../assets/documents/company-profile.pdf";
+import impactImage from "../../assets/images/impact.jpg";
 
 const About = () => {
   return (
     <div className="about-page">
-      <section className="about-hero">
+      <section
+        className="about-hero"
+        style={{ backgroundImage: `url(${aboutImage})` }}
+      >
         <div className="container">
-          <h1>About Us</h1>
-          <p>Learn more about who we are and what drives us to excel</p>
+          <h1 className="hero-heading">Who We Are</h1>
+          <p className="hero-description">
+            A results-driven branding agency that is not afraid of challenges.
+          </p>
         </div>
       </section>
-      
+
       <section className="section about-company">
         <div className="container">
           <div className="company-info">
             <div className="company-content">
-              <h2>Our Story</h2>
+              <h2 className="section-title">About Zamar</h2>
               <p>
-                Zamar Solutions Limited is an experiential marketing and branding agency
-                (instore and outdoor) that has been in existence for 7 years. We have built 
-                a reputation for delivering innovative and effective marketing solutions 
-                that help our clients connect with their audiences in meaningful ways.
+                Zamar Solutions Limited is an experiential marketing and
+                branding agency (instore and outdoor) that has been in existence
+                for 7 years. We have built a reputation for delivering
+                innovative and effective marketing solutions that help our
+                clients connect with their audiences in meaningful ways.
               </p>
               <p>
-                Our expertise spans across strategic consulting, retail marketing, brand activations,
-                and comprehensive branding solutions. We believe in creating memorable experiences
-                that bring brands to life and drive tangible results.
+                Our expertise spans across strategic consulting, retail
+                marketing, brand activations, and comprehensive branding
+                solutions. We believe in creating memorable experiences that
+                bring brands to life and drive tangible results.
               </p>
+              <a
+                href={companyProfile}
+                download="Zamar_Solutions_Company_Profile.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="button1"
+              >
+                Company Profile
+              </a>
             </div>
             <div className="company-image">
-              <img src="/assets/images/about-company.jpg" alt="Zamar Solutions Team" />
+              <img src={aboutCompanyImage} alt="Zamar Solutions Team" />
             </div>
           </div>
         </div>
       </section>
-      
+
       <section className="section mission-vision">
         <div className="container">
           <div className="mission-vision-grid">
@@ -42,101 +66,142 @@ const About = () => {
               <h3>Our Mission</h3>
               <p>Activations and beyond</p>
               <p>
-                We strive to create impactful brand experiences that connect companies
-                with their target audience through innovative marketing strategies and
-                activations.
+                We strive to create impactful brand experiences that connect
+                companies with their target audience through innovative
+                marketing strategies and activations.
               </p>
             </div>
             <div className="vision-box">
               <h3>Our Vision</h3>
               <p>To be the leading corporate retail solutions provider</p>
               <p>
-                We aim to revolutionize how brands engage with consumers by delivering
-                cutting-edge retail marketing solutions that drive growth and brand
-                loyalty.
+                We aim to revolutionize how brands engage with consumers by
+                delivering cutting-edge retail marketing solutions that drive
+                growth and brand loyalty.
               </p>
             </div>
           </div>
         </div>
       </section>
-      
-      <section className="section values-section">
+
+      <section
+        className="section impact-section"
+        style={{ backgroundImage: `url(${impactImage})` }}
+      >
         <div className="container">
-          <h2 className="section-title">Our Core Values</h2>
-          <div className="values-grid">
-            <div className="value-card">
-              <div className="value-icon">
-                <i className="icon-value"></i>
+          <h2
+            className="sub-section-heading"
+            style={{
+              color: "white",
+              textAlign: "center",
+              lineHeight: "1.9rem",
+            }}
+          >
+            Our Impact
+          </h2>
+          <p
+            className="section-description"
+            style={{ color: "white", textAlign: "center" }}
+          >
+            Empowering brands with innovative activations and strategic branding
+            solutions across Kenya, Rwanda, Uganda, Tanzania, and South Sudan.
+          </p>
+          <div className="impact-grid">
+            <div className="impact-item">
+              <div className="impact-number">
+                <span className="number">120</span>
+                <span className="suffix">+</span>
               </div>
-              <h3>Value Centric</h3>
-              <p>
-                We prioritize delivering genuine value to our clients and their customers
-                in every project we undertake.
-              </p>
+              <h3 className="impact-heading">Projects Completed</h3>
             </div>
-            <div className="value-card">
-              <div className="value-icon">
-                <i className="icon-trust"></i>
+            <div className="impact-item">
+              <div className="impact-number">
+                <span className="number">35</span>
+                <span className="suffix">+</span>
               </div>
-              <h3>Trust</h3>
-              <p>
-                We build lasting relationships based on trust, transparency and reliability
-                with our clients and partners.
-              </p>
+              <h3 className="impact-heading">Clients Served</h3>
             </div>
-            <div className="value-card">
-              <div className="value-icon">
-                <i className="icon-integrity"></i>
+            <div className="impact-item">
+              <div className="impact-number">
+                <span className="number">18</span>
+                <span className="suffix">+</span>
               </div>
-              <h3>Integrity</h3>
-              <p>
-                We conduct our business with the highest ethical standards and honesty in
-                all our dealings.
-              </p>
+              <h3 className="impact-heading">Major Campaigns</h3>
             </div>
-            <div className="value-card">
-              <div className="value-icon">
-                <i className="icon-accountability"></i>
+            <div className="impact-item">
+              <div className="impact-number">
+                <span className="number">7</span>
+                <span className="suffix">+</span>
               </div>
-              <h3>Accountability</h3>
-              <p>
-                We take ownership of our work and stand behind every project we deliver
-                with a commitment to excellence.
-              </p>
+              <h3 className="impact-heading">Years in Branding</h3>
             </div>
           </div>
         </div>
       </section>
-      
+
       <section className="section team-section">
         <div className="container">
           <h2 className="section-title">Our Team</h2>
           <p className="section-description">
-            Behind every successful campaign is our dedicated team of creative and strategic
-            professionals who bring passion and expertise to every project.
+            Behind every successful campaign is our dedicated team of creative
+            and strategic professionals who bring passion and expertise to every
+            project.
           </p>
           <div className="team-grid">
-            {/* Note: Replace with actual team data when available */}
             <div className="team-member">
               <div className="member-image">
-                <img src="/assets/images/team/team-placeholder.jpg" alt="Team Member" />
+                <img src={teamPlaceholderImage} alt="Sarah Mwangi" />
+                <div className="member-overlay">
+                  <h3 className="team-member-heading">Sarah Mwangi</h3>
+                  <p className="team-member-description">
+                    As Creative Director, Sarah crafts bold campaigns that
+                    elevate brands.
+                  </p>
+                </div>
               </div>
-              <h3>Team Member</h3>
-              <p>Position</p>
+              <h3 className="team-member-heading">Sarah Mwangi</h3>
+              <p className="team-member-position">Creative Director</p>
             </div>
             <div className="team-member">
               <div className="member-image">
-                <img src="/assets/images/team/team-placeholder.jpg" alt="Team Member" />
+                <img src={teamPlaceholderImage1} alt="James Otieno" />
+                <div className="member-overlay">
+                  <h3 className="team-member-heading">James Otieno</h3>
+                  <p className="team-member-description">
+                    As Marketing Strategist, James drives impactful activations.
+                  </p>
+                </div>
               </div>
-              <h3>Team Member</h3>
-              <p>Position</p>
+              <h3 className="team-member-heading">James Otieno</h3>
+              <p className="team-member-position">Marketing Strategist</p>
             </div>
             <div className="team-member">
               <div className="member-image">
-                <img src="/assets/images/team/team-placeholder.jpg" alt="Team Member" />
+                <img src={teamPlaceholderImage2} alt="Linda Kamau" />
+                <div className="member-overlay">
+                  <h3 className="team-member-heading">Linda Kamau</h3>
+                  <p className="team-member-description">
+                    As Branding Specialist, Linda creates iconic visuals for
+                    clients.
+                  </p>
+                </div>
               </div>
-              <h3>Team Member</h3>
-              <p>Position</p>
+              <h3 className="team-member-heading">Linda Kamau</h3>
+              <p className="team-member-position">Branding Specialist</p>
+            </div>
+            <div className="team-member">
+              <div className="member-image">
+                <img src={teamPlaceholderImage2} alt="Will Smith" />
+                <div className="member-overlay">
+                  <h3 className="team-member-heading">Will Smith</h3>
+                  <p className="team-member-description">
+                    As Graphic Designer, Will captures audiences with innovative
+                    designs.
+                  </p>
+                </div>
+              </div>
+              <h3 className="team-member-heading">Will Smith</h3>
+              <p className="team-member-position">Graphic Designer</p>
             </div>
           </div>
         </div>

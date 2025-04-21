@@ -1,9 +1,9 @@
-import React from 'react';
-import './ServiceCard.css';
+import React from "react";
+import "./ServiceCard.css";
 
-const ServiceCard = ({ icon, title, description }) => {
+const ServiceCard = ({ icon, title, description, className = "" }) => {
   return (
-    <div className="service-card">
+    <div className={`service-card ${className}`}>
       <div className="service-icon">
         <i className={icon}></i>
       </div>
