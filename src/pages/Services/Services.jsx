@@ -1,20 +1,69 @@
 import React from 'react';
 import ServiceCard from '../../components/ServiceCard/ServiceCard';
-import { services } from '../../data/Services';
 import './Services.css';
+import '../../index.css';
+import servicesImage from '../../assets/images/services.jpg';
+
+// Mock data for 5 services with Font Awesome icons
+const services = [
+  {
+    icon: 'fas fa-bullhorn', // Icon for brand activations
+    title: 'Brand Activations',
+    description: 'Engage your audience with impactful brand activations that create memorable experiences.',
+  },
+  {
+    icon: 'fas fa-store', // Icon for retail marketing
+    title: 'Retail Marketing',
+    description: 'Boost your retail presence with strategic marketing campaigns tailored to your audience.',
+  },
+  {
+    icon: 'fas fa-lightbulb', // Icon for strategic branding
+    title: 'Strategic Branding',
+    description: 'Develop a cohesive brand identity that resonates with your target market.',
+  },
+  {
+    icon: 'fas fa-print', // Icon for printing services
+    title: 'Printing Services',
+    description: 'High-quality printing solutions to bring your brand visuals to life.',
+  },
+  {
+    icon: 'fas fa-paint-brush', // Icon for creative design
+    title: 'Creative Design',
+    description: 'Innovative design services to enhance your brand’s visual appeal.',
+  },
+];
 
 const Services = () => {
   return (
     <div className="services-page">
-      <section className="services-hero">
+      <section className="services-hero" style={{ backgroundImage: `url(${servicesImage})` }}>
         <div className="container">
-          <h1>Our Services</h1>
-          <p>Comprehensive marketing and branding solutions to elevate your business</p>
+          <h1 className="hero-heading">We Offer the Best Branding Services</h1>
+          <p className="hero-description">
+            Zamar Solutions delivers experiential marketing across East Africa—offering brand activations, retail marketing, strategic branding, and printing services with innovative thinking, flawless execution, and a results-driven approach that brings brands to life.
+          </p>
+          <div className="hero-buttons">
+            <button
+              onClick={() => {
+                const servicesMainSection = document.querySelector('.services-main');
+                if (servicesMainSection) {
+                  servicesMainSection.scrollIntoView({ behavior: 'smooth' });
+                }
+              }}
+              className="button1"
+            >
+              Explore More
+            </button>
+            <a href="tel:+254724679202" className="button2">
+              Request a Quote
+            </a>
+          </div>
         </div>
       </section>
       
       <section className="section services-main">
         <div className="container">
+          <h2 className="section-title">Our Services</h2>
           <div className="services-grid">
             {services.map((service, index) => (
               <ServiceCard
@@ -73,7 +122,7 @@ const Services = () => {
           <div className="cta-content">
             <h2>Ready to transform your brand experience?</h2>
             <p>Contact us today to discuss how our services can help achieve your marketing goals.</p>
-            <a href="/contact" className="btn btn-large">Get In Touch</a>
+            <a href="/contact" className="button1">Get In Touch</a>
           </div>
         </div>
       </section>

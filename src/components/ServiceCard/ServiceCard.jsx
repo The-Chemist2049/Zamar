@@ -1,14 +1,20 @@
 import React from "react";
 import "./ServiceCard.css";
 
-const ServiceCard = ({ icon, title, description, className = "" }) => {
+const ServiceCard = ({ icon, image, title, description, className = "" }) => {
   return (
     <div className={`service-card ${className}`}>
       <div className="service-icon">
-        <i className={icon}></i>
+        {image ? (
+          <img src={image} alt={title} className="service-image" />
+        ) : (
+          <i className={icon}></i>
+        )}
       </div>
-      <h3>{title}</h3>
-      <p>{description}</p>
+      <div className="service-content">
+        <h3>{title}</h3>
+        <p>{description}</p>
+      </div>
     </div>
   );
 };

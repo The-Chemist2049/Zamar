@@ -9,16 +9,17 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { services } from "../../data/Services";
 import { testimonials } from "../../data/testimonials";
-// import { clients } from "../../data/clients";
 import "./Home.css";
 import ValueCard from "../../components/CoreSection/ValueCard";
 import { Flex, Title } from "@mantine/core";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 // Register ScrollTrigger plugin
 gsap.registerPlugin(ScrollTrigger);
 
 const Home = () => {
+  const navigate = useNavigate();
   const [clients, setClients] = React.useState([]);
   // Fetch data from the API
   useEffect(() => {
@@ -38,7 +39,6 @@ const Home = () => {
 
     clientLogos();
   }, []);
-  console.log(clients);
 
   const store = useStore(DynamicContentStore);
 
@@ -46,7 +46,7 @@ const Home = () => {
   useEffect(() => {
     // Service card animations
     const animateServiceCards = () => {
-      const serviceCards = document.querySelectorAll(".service-card");
+      const serviceCards = document.querySelectorAll(".service-cad");
 
       serviceCards.forEach((card, index) => {
         gsap.fromTo(
@@ -69,7 +69,7 @@ const Home = () => {
     };
 
     const resetServiceCards = () => {
-      const serviceCards = document.querySelectorAll(".service-card");
+      const serviceCards = document.querySelectorAll(".service-cad");
       serviceCards.forEach((card, index) => {
         gsap.set(card, {
           x: index % 2 === 0 ? -50 : 50,
@@ -80,7 +80,7 @@ const Home = () => {
     };
 
     // Set up scroll triggers
-    if (document.querySelectorAll(".service-card").length > 0) {
+    if (document.querySelectorAll(".service-cad").length > 0) {
       ScrollTrigger.create({
         trigger: ".services-section",
         start: "top bottom-=100",
@@ -148,7 +148,8 @@ const Home = () => {
             {services.slice(0, 3).map((service, index) => (
               <div key={index} className="service-card-wrapper">
                 <ServiceCard
-                  icon={service.icon}
+                  image={service.image} // ✅ NEW
+                  icon={service.icon} // ✅ fallback if image is not present
                   title={service.title}
                   description={service.description}
                   className="service-card"
@@ -157,9 +158,12 @@ const Home = () => {
             ))}
           </div>
           <div className="view-more-container">
-            <Link to="/services" className="btn">
+            <button
+              className="btn btn-large"
+              onClick={() => navigate("/services")}
+            >
               View All Services
-            </Link>
+            </button>
           </div>
         </div>
       </section>

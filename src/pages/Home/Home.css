@@ -11,6 +11,7 @@
 .core-section {
   width: 95%;
   margin: 0 auto;
+  margin-bottom: -3rem;
   padding: 1rem 0;
   position: relative;
 }
@@ -54,26 +55,13 @@
   gap: 3rem;
   position: relative;
   z-index: 2;
+  margin-bottom: 2rem;
 }
 
 .service-card-wrapper {
   display: block;
   will-change: transform;
   position: relative;
-}
-
-.service-card {
-  background: rgba(255, 255, 255, 1);
-  border-radius: 20px;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.04), 0 1px 5px rgba(0, 0, 0, 0.03);
-  padding: 2.8rem;
-  transition: all 0.6s cubic-bezier(0.25, 1, 0.5, 1);
-  border: 1px solid rgba(238, 238, 238, 0.5);
-  text-align: center;
-  position: relative;
-  overflow: hidden;
-  backdrop-filter: blur(10px);
-  height: 100%;
 }
 
 .service-card::before {
@@ -126,7 +114,7 @@
   position: relative;
 }
 
-.view-more-container::before {
+/* .view-more-container::before {
   content: "";
   position: absolute;
   width: 150px;
@@ -140,7 +128,7 @@
   bottom: -20px;
   left: 50%;
   transform: translateX(-50%);
-}
+} */
 
 .view-more-container .btn {
   background: linear-gradient(135deg, #ff6b00, #ff8f40);
@@ -164,7 +152,7 @@
   box-shadow: 0 20px 35px rgba(255, 107, 0, 0.3);
 }
 
-.view-more-container .btn::after {
+/* .view-more-container .btn::after {
   content: "";
   position: absolute;
   top: 0;
@@ -175,14 +163,16 @@
   z-index: -1;
   transition: opacity 0.5s ease;
   opacity: 0;
-}
+} */
 
-.view-more-container .btn:hover::after {
+/* .view-more-container .btn:hover::after {
   opacity: 1;
-}
+  transform: scale(1.05);
+  background-color: #ff8f40;
+} */
 
 /* Modern button effect */
-.view-more-container .btn::before {
+/* .view-more-container .btn::before {
   content: "";
   position: absolute;
   top: 0;
@@ -197,7 +187,7 @@
   );
   transition: 0.5s;
   z-index: 1;
-}
+} */
 
 .view-more-container .btn:hover::before {
   left: 100%;
@@ -310,10 +300,10 @@
   /* background-color: blue; */
   overflow: hidden;
   position: relative;
-  margin-top: -3rem;
+  /* margin-top: -3rem; */
   margin: 0;
   padding: 0;
-  margin-bottom: -1rem;
+  margin-bottom: -6rem;
   /* border-bottom: 10px solid rgba(238, 238, 238, 0.5); */
 }
 
