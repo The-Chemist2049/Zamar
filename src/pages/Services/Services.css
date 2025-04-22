@@ -9,7 +9,6 @@
   min-height: 550px; /* Increased from 600px */
 }
 
-
 /* Responsive adjustment for screens 1024px and below */
 @media (max-width: 1024px) {
   .services-hero {
@@ -17,68 +16,63 @@
   }
 }
 
-  
-  
+.services-main .services-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  border-radius: 1px;
+}
+
+.service-process {
+  background-color: #f9f9f9;
+}
+
+.process-steps {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2rem;
+}
+
+.process-step {
+  text-align: center;
+  padding: 2rem;
+  background-color: white;
+  border-radius: 1px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+}
+
+.step-number {
+  font-size: 3rem;
+  font-weight: 800;
+  color: #ff6b00;
+  margin-bottom: 1rem;
+  opacity: 0.3;
+}
+
+.process-step h3 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  color: #222;
+}
+
+.process-step p {
+  color: #777;
+  line-height: 1.6;
+}
+
+@media (max-width: 992px) {
   .services-main .services-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 2rem;
-   
+    grid-template-columns: repeat(2, 1fr);
   }
-  
-  .service-process {
-    background-color: #f9f9f9;
-    background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  }
-  
+
   .process-steps {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 2rem;
+    grid-template-columns: repeat(2, 1fr);
   }
-  
-  .process-step {
-    text-align: center;
-    padding: 2rem;
-    background-color: white;
-    border-radius: 1px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+}
+
+@media (max-width: 768px) {
+  .services-main .services-grid,
+  .process-steps {
+    grid-template-columns: 1fr;
   }
-  
-  .step-number {
-    font-size: 3rem;
-    font-weight: 800;
-    color: #e7680c;
-    margin-bottom: 1rem;
-    opacity: 0.3;
-  }
-  
-  .process-step h3 {
-    font-size: 1.5rem;
-    margin-bottom: 1rem;
-    color: #222;
-  }
-  
-  .process-step p {
-    color: #777;
-    line-height: 1.6;
-  }
-  
-  @media (max-width: 992px) {
-    .services-main .services-grid {
-      grid-template-columns: repeat(2, 1fr);
-    }
-    
-    .process-steps {
-      grid-template-columns: repeat(2, 1fr);
-    }
-  }
-  
-  @media (max-width: 768px) {
-    .services-main .services-grid,
-    .process-steps {
-      grid-template-columns: 1fr;
-    }
-  }
+}

@@ -1,18 +1,21 @@
-import React from 'react';
-import '../../index.css';
-import './About.css';
-import aboutImage from '../../assets/images/nairobi.jpg';
-import aboutCompanyImage from '../../assets/images/company.jpg';
-import teamPlaceholderImage from '../../assets/images/team.jpg';
-import teamPlaceholderImage1 from '../../assets/images/team1.jpg';
-import teamPlaceholderImage2 from '../../assets/images/team2.jpg';
-import companyProfile from '../../assets/documents/company-profile.pdf';
-import impactImage from '../../assets/images/impact.jpg';
+import React from "react";
+import "../../index.css";
+import "./About.css";
+import aboutImage from "../../assets/images/nairobi.jpg";
+import aboutCompanyImage from "../../assets/images/company.jpg";
+import teamPlaceholderImage from "../../assets/images/team.jpg";
+import teamPlaceholderImage1 from "../../assets/images/team1.jpg";
+import teamPlaceholderImage2 from "../../assets/images/team2.jpg";
+import companyProfile from "../../assets/documents/company-profile.pdf";
+import impactImage from "../../assets/images/impact.jpg";
 
 const About = () => {
   return (
     <div className="about-page">
-      <section className="about-hero" style={{ backgroundImage: `url(${aboutImage})` }}>
+      <section
+        className="about-hero"
+        style={{ backgroundImage: `url(${aboutImage})` }}
+      >
         <div className="container">
           <h1 className="hero-heading">Who We Are</h1>
           <p className="hero-description">
@@ -20,32 +23,34 @@ const About = () => {
           </p>
         </div>
       </section>
-      
+
       <section className="section about-company">
         <div className="container">
           <div className="company-info">
             <div className="company-content">
               <h2 className="section-title">About Zamar</h2>
               <p>
-                Zamar Solutions Limited is an experiential marketing and branding agency
-                (instore and outdoor) that has been in existence for 7 years. We have built 
-                a reputation for delivering innovative and effective marketing solutions 
-                that help our clients connect with their audiences in meaningful ways.
+                Zamar Solutions Limited is an experiential marketing and
+                branding agency (instore and outdoor) that has been in existence
+                for 7 years. We have built a reputation for delivering
+                innovative and effective marketing solutions that help our
+                clients connect with their audiences in meaningful ways.
               </p>
               <p>
-                Our expertise spans across strategic consulting, retail marketing, brand activations,
-                and comprehensive branding solutions. We believe in creating memorable experiences
-                that bring brands to life and drive tangible results.
+                Our expertise spans across strategic consulting, retail
+                marketing, brand activations, and comprehensive branding
+                solutions. We believe in creating memorable experiences that
+                bring brands to life and drive tangible results.
               </p>
               <a
-  href={companyProfile}
-  target="_blank"
-  rel="noopener noreferrer"
-  className="button1"
->
-  Company Profile
-</a>
-
+                href={companyProfile}
+                download="Zamar_Solutions_Company_Profile.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="button1"
+              >
+                Company Profile
+              </a>
             </div>
             <div className="company-image">
               <img src={aboutCompanyImage} alt="Zamar Solutions Team" />
@@ -53,7 +58,7 @@ const About = () => {
           </div>
         </div>
       </section>
-      
+
       <section className="section mission-vision">
         <div className="container">
           <div className="mission-vision-grid">
@@ -61,37 +66,45 @@ const About = () => {
               <h3>Our Mission</h3>
               <p>Activations and beyond</p>
               <p>
-                We strive to create impactful brand experiences that connect companies
-                with their target audience through innovative marketing strategies and
-                activations.
+                We strive to create impactful brand experiences that connect
+                companies with their target audience through innovative
+                marketing strategies and activations.
               </p>
             </div>
             <div className="vision-box">
               <h3>Our Vision</h3>
               <p>To be the leading corporate retail solutions provider</p>
               <p>
-                We aim to revolutionize how brands engage with consumers by delivering
-                cutting-edge retail marketing solutions that drive growth and brand
-                loyalty.
+                We aim to revolutionize how brands engage with consumers by
+                delivering cutting-edge retail marketing solutions that drive
+                growth and brand loyalty.
               </p>
             </div>
           </div>
         </div>
       </section>
-      
-      <section className="section impact-section" style={{ backgroundImage: `url(${impactImage})` }}>
+
+      <section
+        className="section impact-section"
+        style={{ backgroundImage: `url(${impactImage})` }}
+      >
         <div className="container">
           <h2
             className="sub-section-heading"
-            style={{ color: 'white', textAlign: 'center', lineHeight: '1.9rem' }}
+            style={{
+              color: "white",
+              textAlign: "center",
+              lineHeight: "1.9rem",
+            }}
           >
             Our Impact
           </h2>
           <p
             className="section-description"
-            style={{ color: 'white', textAlign: 'center' }}
+            style={{ color: "white", textAlign: "center" }}
           >
-            Empowering brands with innovative activations and strategic branding solutions across Kenya, Rwanda, Uganda, Tanzania, and South Sudan.
+            Empowering brands with innovative activations and strategic branding
+            solutions across Kenya, Rwanda, Uganda, Tanzania, and South Sudan.
           </p>
           <div className="impact-grid">
             <div className="impact-item">
@@ -125,13 +138,14 @@ const About = () => {
           </div>
         </div>
       </section>
-      
+
       <section className="section team-section">
         <div className="container">
           <h2 className="section-title">Our Team</h2>
           <p className="section-description">
-            Behind every successful campaign is our dedicated team of creative and strategic
-            professionals who bring passion and expertise to every project.
+            Behind every successful campaign is our dedicated team of creative
+            and strategic professionals who bring passion and expertise to every
+            project.
           </p>
           <div className="team-grid">
             <div className="team-member">
@@ -140,7 +154,8 @@ const About = () => {
                 <div className="member-overlay">
                   <h3 className="team-member-heading">Sarah Mwangi</h3>
                   <p className="team-member-description">
-                    As Creative Director, Sarah crafts bold campaigns that elevate brands.
+                    As Creative Director, Sarah crafts bold campaigns that
+                    elevate brands.
                   </p>
                 </div>
               </div>
@@ -166,7 +181,8 @@ const About = () => {
                 <div className="member-overlay">
                   <h3 className="team-member-heading">Linda Kamau</h3>
                   <p className="team-member-description">
-                    As Branding Specialist, Linda creates iconic visuals for clients.
+                    As Branding Specialist, Linda creates iconic visuals for
+                    clients.
                   </p>
                 </div>
               </div>
@@ -179,7 +195,8 @@ const About = () => {
                 <div className="member-overlay">
                   <h3 className="team-member-heading">Will Smith</h3>
                   <p className="team-member-description">
-                    As Graphic Designer, Will captures audiences with innovative designs.
+                    As Graphic Designer, Will captures audiences with innovative
+                    designs.
                   </p>
                 </div>
               </div>

@@ -1,7 +1,7 @@
 /* About page-specific styles */
 
 /* Hero section */
-.about-hero{
+.about-hero {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -13,7 +13,7 @@
 }
 
 .about-hero::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: 0;
@@ -83,7 +83,7 @@
 }
 
 .impact-section::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: 0;
@@ -118,21 +118,21 @@
 }
 
 .impact-number .number {
-  font-family: 'Work Sans', sans-serif;
+  font-family: "Work Sans", sans-serif;
   font-size: 2.5rem;
   font-weight: 700;
   color: var(--white);
 }
 
 .impact-number .suffix {
-  font-family: 'Work Sans', sans-serif;
+  font-family: "Work Sans", sans-serif;
   font-size: 1.5rem;
   color: var(--primary-accent);
   margin-left: 0.25rem;
 }
 
 .impact-heading {
-  font-family: 'Work Sans', sans-serif;
+  font-family: "Work Sans", sans-serif;
   font-size: 1.2rem;
   font-weight: 600;
   color: var(--white);
@@ -212,7 +212,7 @@
 }
 
 .member-overlay .team-member-heading {
-  font-family: 'Helvetica', 'Arial', sans-serif;
+  font-family: "Helvetica", "Arial", sans-serif;
   font-size: 1.3rem;
   font-weight: 700;
   color: var(--white);
@@ -221,7 +221,7 @@
 }
 
 .member-overlay .team-member-description {
-  font-family: 'Helvetica', 'Arial', sans-serif;
+  font-family: "Helvetica", "Arial", sans-serif;
   font-size: 0.9rem;
   font-weight: 400;
   color: var(--white);
@@ -231,7 +231,7 @@
 }
 
 .team-member-heading {
-  font-family: 'Helvetica', 'Arial', sans-serif;
+  font-family: "Helvetica", "Arial", sans-serif;
   font-size: 1.4rem;
   font-weight: 700;
   color: var(--dark-text);
@@ -241,7 +241,7 @@
 }
 
 .team-member-position {
-  font-family: 'Helvetica', 'Arial', sans-serif;
+  font-family: "Helvetica", "Arial", sans-serif;
   font-size: 0.95rem;
   font-weight: 400;
   color: var(--primary-accent);
@@ -263,7 +263,7 @@
     grid-template-columns: 1fr;
     gap: 2rem;
   }
-  
+
   .impact-grid,
   .team-grid {
     grid-template-columns: repeat(2, 1fr);
@@ -295,15 +295,15 @@
   .impact-number .number {
     font-size: 2rem;
   }
-  
+
   .impact-number .suffix {
     font-size: 1.25rem;
   }
-  
+
   .impact-heading {
     font-size: 1rem;
   }
-  
+
   .impact-title {
     color: white;
   }

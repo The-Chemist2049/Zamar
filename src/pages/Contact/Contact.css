@@ -1,215 +1,147 @@
-/* Contact.css */
-@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css');
-
-.contact-container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 40px 20px;
-  font-family: 'Roboto', Arial, sans-serif;
+:root {
+  --primary: #4f46e5;
+  --accent: #caf0f8;
+  --text: #333;
+  --muted: #777;
 }
 
-.contact-header {
+.zamar-contact {
+  font-family: "Inter", sans-serif;
+  padding: 60px 30px;
+  background-color: #fff;
+  color: var(--text);
+  min-height: 100vh;
+  margin-top: 50px;
+}
+
+.zamar-header {
   text-align: center;
-  margin-bottom: 50px;
+  max-width: 700px;
+  margin: 0 auto 50px;
 }
 
-.contact-header h1 {
-  font-size: 2.5rem;
-  color: #333;
-  margin-bottom: 15px;
-}
-
-.contact-header p {
-  font-size: 1.1rem;
-  color: #666;
-}
-
-.contact-content {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 40px;
-  margin-bottom: 60px;
-}
-
-.contact-info {
-  flex: 1;
-  min-width: 300px;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 20px;
-}
-
-.info-card {
-  background-color: #f9f9f9;
-  padding: 25px;
-  border-radius: 10px;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-  text-align: center;
-  transition: transform 0.3s ease;
-}
-
-.info-card:hover {
-  transform: translateY(-5px);
-}
-
-.info-icon {
-  width: 60px;
-  height: 60px;
-  background-color: #007bff;
-  color: white;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 0 auto 15px auto;
-}
-
-.info-icon i {
-  font-size: 24px;
-}
-
-.info-card h3 {
+.zamar-header h1 {
+  font-size: 42px;
+  color: var(--primary);
   margin-bottom: 10px;
-  color: #333;
 }
 
-.info-card p {
-  color: #666;
-  margin: 5px 0;
+.zamar-header p {
+  font-size: 18px;
+  color: var(--muted);
 }
 
-.contact-form {
-  flex: 2;
-  min-width: 300px;
-  background-color: white;
+.zamar-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+@media (min-width: 900px) {
+  .zamar-grid {
+    flex-direction: row;
+    align-items: flex-start;
+  }
+}
+
+.zamar-form {
+  flex: 1;
+  background: var(--accent);
   padding: 30px;
-  border-radius: 10px;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
 }
 
-.contact-form h2 {
-  color: #333;
-  margin-bottom: 25px;
-  text-align: center;
+.zamar-form h2 {
+  font-size: 22px;
+  margin-bottom: 20px;
+  color: var(--primary);
 }
 
-.form-group {
+.form-field {
   margin-bottom: 20px;
 }
 
-label {
+.form-field label {
   display: block;
+  font-weight: 600;
   margin-bottom: 8px;
-  color: #555;
-  font-weight: 500;
+  color: var(--text);
 }
 
-input, textarea {
+.form-field input,
+.form-field textarea {
   width: 100%;
-  padding: 12px;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  font-size: 1rem;
-  font-family: inherit;
+  padding: 12px 15px;
+  font-size: 15px;
+  border-radius: 12px;
+  border: 1px solid #ccc;
+  transition: border-color 0.3s;
 }
 
-input:focus, textarea:focus {
+.form-field input:focus,
+.form-field textarea:focus {
+  border-color: var(--primary);
   outline: none;
-  border-color: #007bff;
-  box-shadow: 0 0 0 2px rgba(0,123,255,0.25);
 }
 
-.submit-btn {
-  background-color: #007bff;
-  color: white;
+.zamar-form button {
+  background-color: var(--primary);
+  color: #fff;
+  padding: 14px;
+  width: 100%;
   border: none;
-  border-radius: 5px;
-  padding: 12px 24px;
-  font-size: 1rem;
+  border-radius: 12px;
+  font-weight: bold;
+  font-size: 16px;
   cursor: pointer;
   transition: background-color 0.3s ease;
-  display: block;
-  width: 100%;
-  margin-top: 10px;
 }
 
-.submit-btn:hover {
-  background-color: #0069d9;
+.zamar-form button:hover {
+  background-color: #4338ca;
 }
 
-.success-message {
-  background-color: #d4edda;
-  color: #155724;
-  padding: 12px;
-  border-radius: 5px;
+.zamar-info-box {
+  flex: 1;
+  background: #f9f9ff;
+  padding: 30px;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+}
+
+.zamar-info-box h2 {
+  font-size: 22px;
   margin-bottom: 20px;
-  text-align: center;
+  color: var(--primary);
 }
 
-.map-container {
-  margin-bottom: 60px;
-}
-
-.map-container h2 {
-  color: #333;
-  margin-bottom: 20px;
-  text-align: center;
-}
-
-.map-placeholder {
-  height: 400px;
-  background-color: #f2f2f2;
+.zamar-info-item {
   display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 10px;
-  color: #666;
+  align-items: flex-start;
+  gap: 14px;
+  margin-bottom: 20px;
 }
 
-.services-overview {
-  margin-bottom: 40px;
+.zamar-info-item .icon {
+  color: var(--primary);
+  margin-top: 4px;
+  flex-shrink: 0;
 }
 
-.services-overview h2 {
-  color: #333;
-  margin-bottom: 30px;
-  text-align: center;
+.zamar-info-item a {
+  color: var(--primary);
+  text-decoration: none;
 }
 
-.services-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 30px;
+.zamar-info-item a:hover {
+  text-decoration: underline;
 }
 
-.service-item {
-  background-color: #f9f9f9;
-  padding: 25px;
-  border-radius: 10px;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-  transition: transform 0.3s ease;
-}
-
-.service-item:hover {
-  transform: translateY(-5px);
-}
-
-.service-item h3 {
-  color: #333;
-  margin-bottom: 15px;
-}
-
-.service-item p {
-  color: #666;
-}
-
-/* Responsive Adjustments */
-@media (max-width: 768px) {
-  .contact-content {
-    flex-direction: column;
-  }
-  
-  .contact-info {
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-  }
+.zamar-map iframe {
+  width: 100%;
+  height: 280px;
+  border: none;
+  border-radius: 16px;
+  margin-top: 10px;
 }

@@ -1,0 +1,238 @@
+:root {
+  --primary: #3a7cf6;
+  --primary-dark: #2c6fe0;
+  --sidebar-bg: rgba(255, 255, 255, 0.85);
+  --sidebar-border: rgba(230, 232, 236, 0.8);
+  --hover-bg: #fbfcfd;
+  --text-primary: #2a3548;
+  --text-secondary: #596577;
+  --sub-hover: rgba(245, 247, 250, 0.8);
+}
+
+/* --- Sidebar Container --- */
+.category-sidebar {
+  width: 280px;
+  background: var(--sidebar-bg);
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--sidebar-border);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  border-radius: 14px;
+  padding: 1.75rem 1.5rem;
+  transition: all 0.3s ease;
+  height: 100%;
+}
+
+/* --- Structure --- */
+.category-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.category-header {
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid var(--sidebar-border);
+  margin-bottom: 0.5rem;
+}
+
+.category-title {
+  color: var(--text-primary);
+  font-size: 1.25rem;
+  letter-spacing: -0.5px;
+}
+
+.nav-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+/* --- Nav Button Base --- */
+.category-button {
+  display: flex;
+  align-items: center;
+  background-color: #fff;
+  color: #3c4257;
+  border: 1px solid var(--sidebar-border);
+  font-weight: 500;
+  border-radius: 10px;
+  padding: 0.75rem 1rem;
+  font-size: 0.95rem;
+  position: relative;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
+  overflow: hidden;
+  z-index: 1;
+}
+
+.category-button:hover {
+  background-color: var(--hover-bg);
+  transform: translateY(-3px) scale(1.01);
+  box-shadow: 0 6px 12px rgba(58, 124, 246, 0.12);
+}
+
+.category-button.active::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 100%;
+  background: linear-gradient(to bottom, var(--primary), var(--primary-dark));
+  border-top-right-radius: 4px;
+  border-bottom-right-radius: 4px;
+}
+
+/* --- Filled Variant --- */
+.category-button[data-variant="filled"] {
+  background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+  color: #fff;
+  border-color: var(--primary);
+  box-shadow: 0 4px 10px rgba(58, 124, 246, 0.2);
+}
+
+.category-button[data-variant="filled"]:hover {
+  background: linear-gradient(135deg, #4a89ff, var(--primary));
+  box-shadow: 0 5px 12px rgba(58, 124, 246, 0.25);
+}
+
+/* --- Icon Styling --- */
+.category-button svg {
+  margin-right: 0.5rem;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+  opacity: 0.8;
+}
+
+.category-button:hover svg {
+  opacity: 1;
+  transform: scale(1.2) rotate(3deg);
+}
+
+.category-button[data-variant="filled"] svg {
+  filter: brightness(1.2);
+}
+
+/* --- Group & SubNav --- */
+.nav-group {
+  display: flex;
+  flex-direction: column;
+  border-radius: 10px;
+  background-color: rgba(250, 251, 253, 0.5);
+  transition: background-color 0.3s ease;
+}
+
+.nav-group:hover {
+  background-color: #f7f9fc;
+}
+
+.sub-nav {
+  display: flex;
+  flex-direction: column;
+  max-height: 0;
+  opacity: 0;
+  padding-left: 1.25rem;
+  transition: max-height 0.4s ease, opacity 0.3s ease;
+  margin: 0.4rem 0 0.5rem;
+}
+
+.nav-group:hover .sub-nav {
+  max-height: 500px;
+  opacity: 1;
+}
+
+/* --- Subcategory Buttons --- */
+.subcategory-button {
+  border-left: 2px solid var(--sidebar-border);
+  border-radius: 0 8px 8px 0;
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  padding: 0.6rem 0.8rem;
+  margin-bottom: 0.3rem;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.subcategory-button:hover {
+  background-color: var(--sub-hover);
+  color: var(--primary);
+  border-left-color: #8db2ff;
+}
+
+.subcategory-button.active-sub {
+  background-color: rgba(240, 247, 255, 0.8);
+  color: var(--primary);
+  font-weight: 500;
+  border-left-color: var(--primary);
+}
+
+.subcategory-button::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background-color: var(--primary);
+  transition: width 0.3s ease;
+}
+
+.subcategory-button:hover::after {
+  width: 100%;
+}
+
+/* --- Animation Effects --- */
+@keyframes pulse {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.03);
+  }
+}
+
+.category-button.active:not([data-variant="filled"]):hover {
+  animation: pulse 1s infinite;
+}
+
+/* Optional: Subcategory Pulse */
+@keyframes pulseBar {
+  0%,
+  100% {
+    width: 100%;
+    opacity: 1;
+  }
+  50% {
+    width: 80%;
+    opacity: 0.6;
+  }
+}
+
+.subcategory-button.active-sub::after {
+  animation: pulseBar 1.5s infinite;
+}
+
+/* --- Responsive --- */
+@media (max-width: 992px) {
+  .category-sidebar {
+    width: 260px;
+  }
+}
+
+@media (max-width: 768px) {
+  .category-sidebar {
+    width: 100%;
+    margin-bottom: 2rem;
+    padding: 1.5rem;
+  }
+
+  .nav-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 0.75rem;
+  }
+
+  .sub-nav {
+    padding-left: 1rem;
+  }
+}

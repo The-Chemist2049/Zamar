@@ -1,0 +1,97 @@
+.value-card {
+  display: flex;
+  gap: 1rem;
+  cursor: pointer;
+  flex: 1;
+  min-width: 300px;
+  background-color: white;
+  padding: 2.5rem;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.value-card:hover {
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  transform: scale(0.98);
+}
+
+.icon-container {
+  width: 70px;
+  height: 70px;
+  margin: auto;
+  display: flex;
+  position: relative;
+}
+
+.icon-background {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 75%;
+  height: 75%;
+  margin: auto;
+  border-radius: 50%;
+  filter: blur(20px);
+}
+
+.icon-background.primary {
+  background-color: #1d4ed8; 
+}
+
+.icon-background.accent {
+  background-color: #f97316;
+}
+
+.icon-foreground {
+  margin: auto;
+  color: white;
+  z-index: 1;
+}
+
+.text-content {
+  flex: 1;
+  margin: auto;
+}
+@media (max-width: 768px) {
+  .value-card {
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 100%; 
+    min-width: unset; 
+    padding: 1.5rem 1rem; 
+    margin: 0 auto;  
+    box-sizing: border-box; /
+  }
+
+  .value-card h3,
+  .value-card h4 {
+    text-align: center;
+    width: 100%;
+  }
+
+  .value-card p {
+    text-align: center;
+    width: 100%;
+  }
+
+  .icon-container {
+    margin: 0 0 1rem 0;
+  }
+
+  .icon-background {
+    width: 100%;
+    height: 100%;
+  }
+
+  .icon-background.primary {
+    width: 80%;
+    height: 80%;
+  }
+
+  .text-content {
+    width: 100%;
+  }
+}
