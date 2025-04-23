@@ -8,6 +8,8 @@ import teamPlaceholderImage1 from "../../assets/images/team1.jpg";
 import teamPlaceholderImage2 from "../../assets/images/team2.jpg";
 import companyProfile from "../../assets/documents/company-profile.pdf";
 import impactImage from "../../assets/images/impact.jpg";
+import missionImage from "../../assets/images/mission.svg";
+import visionImage from "../../assets/images/vision.svg";
 
 const About = () => {
   return (
@@ -64,20 +66,26 @@ const About = () => {
           <div className="mission-vision-grid">
             <div className="mission-box">
               <h3>Our Mission</h3>
-              <p>Activations and beyond</p>
+              <img
+                src={missionImage}
+                alt="Rocket representing Zamar’s mission for brand activation"
+                className="card-illustration"
+              />
+<p className="card-p">Activations and Beyond</p>
               <p>
-                We strive to create impactful brand experiences that connect
-                companies with their target audience through innovative
-                marketing strategies and activations.
+                We strive to create impactful brand experiences that connect companies with their target audience through innovative experiential marketing strategies and brand activations across Kenya and East Africa. From Nairobi roadshows to in-store promotions, our tailored vehicle branding and street marketing solutions drive engagement and build lasting brand loyalty. With clients like Lato Milk, we deliver tailored experiential marketing in Kenya that elevates brand visibility and fosters meaningful consumer connections.
               </p>
             </div>
             <div className="vision-box">
               <h3>Our Vision</h3>
-              <p>To be the leading corporate retail solutions provider</p>
+              <img
+                src={visionImage}
+                alt="Binoculars representing Zamar’s vision for retail marketing"
+                className="card-illustration"
+              />
+                <p className="card-p">To Be the Leading Corporate Retail Solutions Provider</p>
               <p>
-                We aim to revolutionize how brands engage with consumers by
-                delivering cutting-edge retail marketing solutions that drive
-                growth and brand loyalty.
+                We aim to revolutionize how brands engage with consumers by delivering cutting-edge retail marketing and branding solutions that drive growth and loyalty. As Kenya’s leading brand activation agency, we deliver creative wall branding and retail marketing solutions across Nairobi and Tanzania. From billboards to mall activations, Zamar’s innovative strategies redefine corporate retail experiences in East Africa.
               </p>
             </div>
           </div>

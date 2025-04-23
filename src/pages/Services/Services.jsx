@@ -3,6 +3,8 @@ import ServiceCard from '../../components/ServiceCard/ServiceCard';
 import './Services.css';
 import '../../index.css';
 import servicesImage from '../../assets/images/services.jpg';
+import processImage from '../../assets/images/process.jpg';
+import { color } from 'framer-motion';
 
 // Mock data for 5 services with Font Awesome icons
 const services = [
@@ -62,6 +64,7 @@ const Services = () => {
       </section>
       
       <section className="section services-main">
+        
         <div className="container">
           <h2 className="section-title">Our Services</h2>
           <div className="services-grid">
@@ -77,9 +80,9 @@ const Services = () => {
         </div>
       </section>
       
-      <section className="section service-process">
+      <section className="section service-process" style={{ backgroundImage: `url(${processImage})` }}>
         <div className="container">
-          <h2 className="section-title">Our Process</h2>
+        <h2 className="section-title" style={{ color: 'white' }}>Our Process</h2>
           <div className="process-steps">
             <div className="process-step">
               <div className="step-number">01</div>

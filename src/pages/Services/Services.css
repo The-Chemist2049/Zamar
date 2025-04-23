@@ -9,6 +9,7 @@
   min-height: 550px; /* Increased from 600px */
 }
 
+
 /* Responsive adjustment for screens 1024px and below */
 @media (max-width: 1024px) {
   .services-hero {
@@ -16,57 +17,106 @@
   }
 }
 
-.services-main .services-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 2rem;
-  border-radius: 1px;
-}
-
+  
+  
+  .services-main .services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+   
+  }
+  
+  /* Service process section */
 .service-process {
   background-color: #f9f9f9;
+  padding: 4rem 2rem; /* Increased padding for breathing room */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
+/* Process steps grid */
 .process-steps {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 2rem;
+  max-width: 1200px; /* Constrain width for consistency */
+  margin: 0 auto; /* Center the grid */
 }
 
+/* Individual process step card */
 .process-step {
-  text-align: center;
-  padding: 2rem;
-  background-color: white;
-  border-radius: 1px;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  position: relative; /* Required for ::before positioning */
+  text-align: left; /* Changed to left for better alignment with vertical line */
+  padding: 2rem 2rem 2rem 3rem; /* Increased left padding to accommodate line */
+  background-color: #ffffff;
+  border-radius: 1px; /* Softer corners for modern look */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08); /* Subtler, modern shadow */
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth hover effect */
 }
 
+/* Vertical line on the left */
+.process-step::before {
+  content: "";
+  position: absolute;
+  left: 1rem; /* Positioned 1rem from the left edge */
+  top: 1rem; /* Start 1rem from the top */
+  width: 2px; /* Slightly thicker for visibility */
+  height: 20%; /* Line spans 60% of card height */
+  background: #f15a2a; /* Matches step-number color for cohesion */
+}
+
+/* Hover effect for interactivity */
+.process-step:hover {
+  transform: translateY(-5px); /* Slight lift on hover */
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12); /* Stronger shadow on hover */
+}
+
+/* Step number styling */
 .step-number {
-  font-size: 3rem;
+  font-size: 2.5rem; /* Slightly smaller for balance */
   font-weight: 800;
-  color: #ff6b00;
-  margin-bottom: 1rem;
-  opacity: 0.3;
+  color: #f15a2a;
+  margin-bottom: 0.75rem;
+  opacity: 0.8; /* Adjusted for subtlety */
+  text-align: left;
 }
 
+/* Heading styling */
 .process-step h3 {
-  font-size: 1.5rem;
-  margin-bottom: 1rem;
-  color: #222;
+  font-size: 1.4rem; /* Slightly smaller for hierarchy */
+  margin-bottom: 0.75rem;
+  color: #222222;
+  font-weight: 600; /* Bolder for emphasis */
 }
 
+/* Paragraph styling */
 .process-step p {
-  color: #777;
-  line-height: 1.6;
+  color: #666666;
+  line-height: 1.7; /* Improved readability */
+  font-size: 1rem; /* Standard size for clarity */
 }
 
+/* Responsive adjustments */
 @media (max-width: 992px) {
   .services-main .services-grid {
     grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem; /* Slightly smaller gap for compactness */
   }
 
   .process-steps {
     grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+
+  .process-step {
+    padding: 1.5rem 1.5rem 1.5rem 2.5rem; /* Adjusted for smaller screens */
+  }
+
+  .process-step::before {
+    left: 0.75rem; /* Slightly closer to edge */
+    top: 0.75rem;
+    height: 20%; /* Shorter line for smaller cards */
   }
 }
 
@@ -74,5 +124,39 @@
   .services-main .services-grid,
   .process-steps {
     grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .services-hero {
+    padding: 4rem 1.5rem; /* Further reduced for mobile */
+    min-height: 350px;
+  }
+
+  .process-step {
+    padding: 1.5rem 1.5rem 1.5rem 2rem;
+  }
+
+  .process-step::before {
+    width: 1.5px; /* Slightly thinner for mobile */
+    height: 20%; /* Even shorter for compact cards */
+  }
+
+  .step-number {
+    font-size: 2rem; /* Smaller for mobile */
+  }
+
+  .process-step h3 {
+    font-size: 1.2rem;
+  }
+
+  .process-step p {
+    font-size: 0.9rem;
+  }
+  
+  @media (max-width: 768px) {
+    .services-main .services-grid,
+    .process-steps {
+      grid-template-columns: 1fr;
+    }
   }
 }
