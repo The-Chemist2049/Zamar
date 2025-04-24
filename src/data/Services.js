@@ -7,18 +7,11 @@ export const services = [
     image: "./indoor.jpg",
   },
   {
-    icon: "icon-branding",
-    title: "Corporate Branding",
+    icon: "icon-street",
+    title: "Street Activations",
     description:
-      "Comprehensive branding solutions including wall branding, vehicle branding, and corporate identity development.",
-    image: "./images/coporatebrandi.jpg",
-  },
-  {
-    icon: "icon-outdoor",
-    title: "Outdoor Advertising",
-    description:
-      "Impactful outdoor marketing through hoardings, billboards, and other external branding elements.",
-    image: "./images/outdoorads.jpg",
+      "Strategic street marketing campaigns to increase brand visibility and consumer engagement.",
+    image: "./images/streetact.jpg",
   },
   {
     icon: "icon-retail",
@@ -35,19 +28,27 @@ export const services = [
     image: "./images/eventmark.jpg",
   },
   {
+    icon: "icon-outdoor",
+    title: "Outdoor Advertising",
+    description:
+      "Impactful outdoor marketing through hoardings, billboards, and other external branding elements.",
+    image: "./images/outdoorads.jpg",
+  },
+  {
+    icon: "icon-branding",
+    title: "Corporate Branding",
+    description:
+      "Comprehensive branding solutions including wall branding, vehicle branding, and corporate identity development.",
+    image: "./images/coporatebrandi.jpg",
+  },
+  {
     icon: "icon-design",
     title: "Design & Printing",
     description:
       "Creative design services and high-quality printing for all marketing materials.",
     image: "./images/designprinting.jpg",
   },
-  {
-    icon: "icon-street",
-    title: "Street Activations",
-    description:
-      "Strategic street marketing campaigns to increase brand visibility and consumer engagement.",
-    image: "./images/streetact.jpg",
-  },
+
   {
     icon: "icon-promotion",
     title: "Sales Promotions",

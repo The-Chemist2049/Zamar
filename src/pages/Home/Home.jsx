@@ -277,7 +277,7 @@ const Home = () => {
       <section className="section services-section">
         <div className="container">
           <h2 className="section-title">Our Services</h2>
-          <div className="services-grid">
+          <div className="services-grid1">
             {services.slice(0, 3).map((service, index) => (
               <div key={index} className="service-card-wrapper">
                 <ServiceCard

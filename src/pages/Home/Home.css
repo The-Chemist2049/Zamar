@@ -79,10 +79,10 @@
   margin-bottom: -6rem;
 }
 
-.services-grid {
+.services-grid1 {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 3rem;
+  gap: 2rem;
   position: relative;
   z-index: 2;
   margin-bottom: 2rem;
@@ -338,8 +338,7 @@
 
 /* ===== CTA Section ===== */
 .cta-section {
-  margin-top: -4rem;
-  background: linear-gradient(45deg, #d7ccc8, #a1887f);
+  background: linear-gradient(135deg, #d7ccc8, #a1887f);
   color: #fff;
   padding: 6rem 0;
   position: relative;
