@@ -4,21 +4,21 @@
   left: 0;
   width: 100%;
   z-index: 1000;
-  padding: 1rem 0;
-  transition: all 0.3s ease;
+  padding: 0.7rem 2rem;
+  transition: all 0.9s ease;
   background-color: #242a58;
 }
-.navbar.navbar.scrolled .navbar-links a {
+.navbar.scrolled .navbar-links a {
   text-decoration: none;
   color: #333;
   font-weight: 500;
   position: relative;
-  transition: color 0.3s ease;
+  transition: color 0.9s ease;
 }
 .navbar.scrolled {
   background-color: white;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  padding: 0.7rem 0;
+  padding: 0.7rem 2rem;
 }
 .navbar.scrolled .navbar-logo {
   color: #333;
@@ -35,6 +35,20 @@
   font-weight: 700;
   text-decoration: none;
   color: white;
+}
+.navbar.scrolled .logo-img {
+  height: 60px;
+  margin-right: 10px;
+  vertical-align: middle;
+  filter: brightness(1) invert(0);
+  transition: color 0.9s ease;
+}
+.logo-img {
+  height: 60px;
+  margin-right: 10px;
+  vertical-align: middle;
+  filter: brightness(0) invert(1);
+  transition: color 0.9s ease;
 }
 
 .navbar-logo span {
@@ -89,7 +103,7 @@
   position: absolute;
   height: 3px;
   width: 100%;
-  background: #333;
+  background: black;
   border-radius: 3px;
   transition: all 0.3s ease;
 }
@@ -123,24 +137,53 @@
 @media (max-width: 768px) {
   .navbar-links {
     position: fixed;
-    top: 0;
+    top: 80px; /* Just below the navbar */
     right: -100%;
-    width: 70%;
-    height: 100vh;
+    width: 45%;
+    height: 40vh;
     background-color: white;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    transition: all 0.3s ease-in-out;
-    box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+    border-radius: 1rem;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    transition: right 0.4s ease, background-color 0.4s ease;
+    padding: 2rem;
+    gap: 1rem;
+    z-index: 999;
   }
 
   .navbar-links.active {
-    right: 0;
+    right: 2%;
   }
 
   .navbar-links li {
-    margin: 1.5rem 0;
+    margin: 1rem 0;
+  }
+
+  .navbar-links a {
+    font-size: 1.1rem;
+    color: #333;
+    transition: color 0.3s ease;
+  }
+
+  .navbar-links a:hover,
+  .navbar-links a.active {
+    color: #ff6b00;
+  }
+
+  .navbar.scrolled .navbar-links {
+    background-color: #242a58;
+    color: white;
+  }
+
+  .navbar.scrolled .navbar-links a {
+    color: white;
+  }
+
+  .navbar.scrolled .navbar-links a:hover,
+  .navbar.scrolled .navbar-links a.active {
+    color: #ff6b00;
   }
 
   .mobile-menu-toggle {

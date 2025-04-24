@@ -3,11 +3,12 @@ import "../../index.css";
 import "./About.css";
 import aboutImage from "../../assets/images/nairobi.jpg";
 import aboutCompanyImage from "../../assets/images/company.jpg";
-import teamPlaceholderImage from "../../assets/images/team.jpg";
-import teamPlaceholderImage1 from "../../assets/images/team1.jpg";
-import teamPlaceholderImage2 from "../../assets/images/team2.jpg";
 import companyProfile from "../../assets/documents/company-profile.pdf";
 import impactImage from "../../assets/images/impact.jpg";
+import teamData from "../../data/teamData";
+import TeamMember from "../../components/TeamCard/TeamMember";
+import impactData from "../../data/impactData";
+import ImpactCard from "../../components/impact/ImpactCard";
 
 const About = () => {
   return (
@@ -44,7 +45,6 @@ const About = () => {
               </p>
               <a
                 href={companyProfile}
-                download="Zamar_Solutions_Company_Profile.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="button1"
@@ -58,7 +58,7 @@ const About = () => {
           </div>
         </div>
       </section>
-
+      {/* mission section */}
       <section className="section mission-vision">
         <div className="container">
           <div className="mission-vision-grid">
@@ -83,7 +83,7 @@ const About = () => {
           </div>
         </div>
       </section>
-
+      {/* impact section */}
       <section
         className="section impact-section"
         style={{ backgroundImage: `url(${impactImage})` }}
@@ -107,38 +107,19 @@ const About = () => {
             solutions across Kenya, Rwanda, Uganda, Tanzania, and South Sudan.
           </p>
           <div className="impact-grid">
-            <div className="impact-item">
-              <div className="impact-number">
-                <span className="number">120</span>
-                <span className="suffix">+</span>
-              </div>
-              <h3 className="impact-heading">Projects Completed</h3>
-            </div>
-            <div className="impact-item">
-              <div className="impact-number">
-                <span className="number">35</span>
-                <span className="suffix">+</span>
-              </div>
-              <h3 className="impact-heading">Clients Served</h3>
-            </div>
-            <div className="impact-item">
-              <div className="impact-number">
-                <span className="number">18</span>
-                <span className="suffix">+</span>
-              </div>
-              <h3 className="impact-heading">Major Campaigns</h3>
-            </div>
-            <div className="impact-item">
-              <div className="impact-number">
-                <span className="number">7</span>
-                <span className="suffix">+</span>
-              </div>
-              <h3 className="impact-heading">Years in Branding</h3>
-            </div>
+            {impactData.map((item, index) => (
+              <ImpactCard
+                key={index}
+                number={item.number}
+                suffix={item.suffix}
+                heading={item.heading}
+              />
+            ))}
           </div>
         </div>
       </section>
 
+      {/* team section */}
       <section className="section team-section">
         <div className="container">
           <h2 className="section-title">Our Team</h2>
@@ -148,61 +129,15 @@ const About = () => {
             project.
           </p>
           <div className="team-grid">
-            <div className="team-member">
-              <div className="member-image">
-                <img src={teamPlaceholderImage} alt="Sarah Mwangi" />
-                <div className="member-overlay">
-                  <h3 className="team-member-heading">Sarah Mwangi</h3>
-                  <p className="team-member-description">
-                    As Creative Director, Sarah crafts bold campaigns that
-                    elevate brands.
-                  </p>
-                </div>
-              </div>
-              <h3 className="team-member-heading">Sarah Mwangi</h3>
-              <p className="team-member-position">Creative Director</p>
-            </div>
-            <div className="team-member">
-              <div className="member-image">
-                <img src={teamPlaceholderImage1} alt="James Otieno" />
-                <div className="member-overlay">
-                  <h3 className="team-member-heading">James Otieno</h3>
-                  <p className="team-member-description">
-                    As Marketing Strategist, James drives impactful activations.
-                  </p>
-                </div>
-              </div>
-              <h3 className="team-member-heading">James Otieno</h3>
-              <p className="team-member-position">Marketing Strategist</p>
-            </div>
-            <div className="team-member">
-              <div className="member-image">
-                <img src={teamPlaceholderImage2} alt="Linda Kamau" />
-                <div className="member-overlay">
-                  <h3 className="team-member-heading">Linda Kamau</h3>
-                  <p className="team-member-description">
-                    As Branding Specialist, Linda creates iconic visuals for
-                    clients.
-                  </p>
-                </div>
-              </div>
-              <h3 className="team-member-heading">Linda Kamau</h3>
-              <p className="team-member-position">Branding Specialist</p>
-            </div>
-            <div className="team-member">
-              <div className="member-image">
-                <img src={teamPlaceholderImage2} alt="Will Smith" />
-                <div className="member-overlay">
-                  <h3 className="team-member-heading">Will Smith</h3>
-                  <p className="team-member-description">
-                    As Graphic Designer, Will captures audiences with innovative
-                    designs.
-                  </p>
-                </div>
-              </div>
-              <h3 className="team-member-heading">Will Smith</h3>
-              <p className="team-member-position">Graphic Designer</p>
-            </div>
+            {teamData.map((member, index) => (
+              <TeamMember
+                key={index}
+                name={member.name}
+                position={member.position}
+                imageSrc={member.imageSrc}
+                description={member.description}
+              />
+            ))}
           </div>
         </div>
       </section>

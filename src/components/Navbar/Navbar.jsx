@@ -23,8 +23,10 @@ const Layout = () => {
   return (
     <>
       <nav className={`navbar ${scrolled ? "scrolled" : ""}`}>
-        <div className="container navbar-container">
+        <div className="navbar-container">
           <Link to="/" className="navbar-logo">
+            {/* logo here */}
+            <img src="/logo.svg" alt="Logo" className="logo-img" />
             <span>ZAMAR</span> Solutions
           </Link>
 

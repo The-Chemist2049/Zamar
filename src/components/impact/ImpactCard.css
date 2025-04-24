@@ -1,0 +1,29 @@
+.impact-item {
+  text-align: center;
+}
+
+.impact-number {
+  margin-bottom: 1rem;
+}
+
+.impact-number .number {
+  font-family: "Work Sans", sans-serif;
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--white);
+}
+
+.impact-number .suffix {
+  font-family: "Work Sans", sans-serif;
+  font-size: 1.5rem;
+  color: var(--primary-accent);
+  margin-left: 0.25rem;
+}
+
+.impact-heading {
+  font-family: "Work Sans", sans-serif;
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--white);
+  text-transform: uppercase;
+}

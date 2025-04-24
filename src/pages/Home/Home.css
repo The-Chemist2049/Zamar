@@ -9,11 +9,11 @@
 
 /* ===== Core Section and Values Row ===== */
 .core-section {
-  width: 95%;
+  width: 90%;
   margin: 0 auto;
   margin-bottom: -3rem;
   padding: 1rem 0;
-  position: relative;
+  /* position: relative; */
 }
 
 .core-title {
@@ -24,21 +24,51 @@
   text-align: center;
 }
 
-.values-row {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  gap: 1.5rem;
-  flex-wrap: nowrap;
-  overflow-x: auto;
-  padding: 1rem 0;
+/* ===== Carousel Common Styles ===== */
+.carousel-container {
+  position: relative;
+  width: 100%;
+  margin: 0 auto;
+  padding: 10px 0;
 }
 
-/* Ensure ValueCard components take equal width */
-.values-row > div {
-  flex: 1;
+/* Desktop styles for carousels */
+.carousel {
+  display: flex;
+  gap: 1rem;
+  padding: 10px 0;
+  position: relative;
+}
+
+/* Desktop styles - values and testimonials in a row */
+.values-row,
+.testimonials-slider {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem;
+  overflow: visible;
+}
+
+.value-card-wrapper,
+.testimonial-card-wrapper {
+  flex: 0 0 calc(33.33% - 2rem);
   min-width: 250px;
-  max-width: 350px;
+  transition: transform 0.3s;
+  margin-bottom: 2rem;
+}
+
+/* Hide navigation buttons and indicators on desktop */
+.nav-buttons,
+.indicators {
+  display: none;
+}
+
+/* ===== Core Values Carousel ===== */
+.values-row {
+  display: flex;
+  gap: 2rem;
+  padding: 1rem 0;
 }
 
 /* ===== Services Section ===== */
@@ -114,22 +144,6 @@
   position: relative;
 }
 
-/* .view-more-container::before {
-  content: "";
-  position: absolute;
-  width: 150px;
-  height: 3px;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    rgba(255, 107, 0, 0.1),
-    transparent
-  );
-  bottom: -20px;
-  left: 50%;
-  transform: translateX(-50%);
-} */
-
 .view-more-container .btn {
   background: linear-gradient(135deg, #ff6b00, #ff8f40);
   color: #fff;
@@ -151,43 +165,6 @@
   transform: translateY(-5px) scale(1.02);
   box-shadow: 0 20px 35px rgba(255, 107, 0, 0.3);
 }
-
-/* .view-more-container .btn::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(135deg, #222, #444);
-  z-index: -1;
-  transition: opacity 0.5s ease;
-  opacity: 0;
-} */
-
-/* .view-more-container .btn:hover::after {
-  opacity: 1;
-  transform: scale(1.05);
-  background-color: #ff8f40;
-} */
-
-/* Modern button effect */
-/* .view-more-container .btn::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    rgba(255, 255, 255, 0.2),
-    transparent
-  );
-  transition: 0.5s;
-  z-index: 1;
-} */
 
 .view-more-container .btn:hover::before {
   left: 100%;
@@ -227,17 +204,22 @@
   opacity: 0.5;
 }
 
+/* ===== Testimonials Carousel ===== */
+.testimonials-carousel-container {
+  max-width: 100%;
+  margin: 0 auto;
+}
+
 .testimonials-slider {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  display: flex;
   gap: 2.5rem;
   position: relative;
   z-index: 1;
 }
 
-.testimonials-slider > div {
-  opacity: 0;
-  transform: translateY(30px);
+.testimonial-card-wrapper {
+  opacity: 1;
+  transform: translateY(0);
   animation: fadeUp 0.6s ease forwards;
   animation-delay: calc(var(--index, 0) * 0.2s);
 }
@@ -297,18 +279,14 @@
 
 /* ===== Clients Section ===== */
 .clients-section {
-  /* background-color: blue; */
   overflow: hidden;
   position: relative;
-  /* margin-top: -3rem; */
   margin: 0;
   padding: 0;
   margin-bottom: -6rem;
-  /* border-bottom: 10px solid rgba(238, 238, 238, 0.5); */
 }
 
 .clients-grid {
-  /* background-color: red; */
   display: flex;
   align-items: center;
   width: max-content;
@@ -360,7 +338,8 @@
 
 /* ===== CTA Section ===== */
 .cta-section {
-  background: linear-gradient(135deg, #ff6b00, #ff8f40);
+  margin-top: -4rem;
+  background: linear-gradient(45deg, #d7ccc8, #a1887f);
   color: #fff;
   padding: 6rem 0;
   position: relative;
@@ -410,6 +389,7 @@
   margin-bottom: 2.5rem;
   line-height: 1.7;
   opacity: 0.9;
+  color: #fff;
 }
 
 .cta-content .btn {
@@ -462,10 +442,15 @@
   font-size: 1.2rem !important;
 }
 
-/* Responsive adjustments */
+/* Mobile styles (max-width: 1024px) */
 @media (max-width: 1024px) {
   .section {
     padding: 5rem 2rem;
+  }
+
+  .value-card-wrapper,
+  .testimonial-card-wrapper {
+    flex: 0 0 calc(50% - 2rem);
   }
 
   .about-preview-container {
@@ -492,9 +477,103 @@
   }
 }
 
+/* Mobile styles (max-width: 768px) */
 @media (max-width: 768px) {
   .section {
     padding: 4rem 1.5rem;
+  }
+
+  .core-section {
+    width: 100%;
+    padding: 1px 0;
+  }
+
+  /* Mobile styles - restore carousel behavior */
+  .carousel {
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    flex-wrap: nowrap;
+    scrollbar-width: none; /* Firefox */
+  }
+
+  .carousel::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera */
+  }
+
+  .values-row,
+  .testimonials-slider {
+    padding: 10px 5px;
+    overflow-x: scroll;
+    gap: 1rem;
+    justify-content: flex-start;
+  }
+
+  .value-card-wrapper,
+  .testimonial-card-wrapper {
+    flex: 0 0 100%;
+    scroll-snap-align: center;
+    min-width: 250px;
+    margin-bottom: 0;
+  }
+
+  /* Show navigation buttons and indicators on mobile */
+  .nav-buttons {
+    display: flex;
+    justify-content: space-between;
+    position: absolute;
+    width: 100%;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10;
+    padding: 0 10px;
+  }
+
+  .indicators {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    gap: 10px;
+  }
+
+  .indicator {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: #ddd;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+  }
+
+  .indicator.active {
+    background-color: #ff6b00;
+    transform: scale(1.2);
+  }
+
+  .nav-btn {
+    background-color: rgba(255, 255, 255, 0.7);
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    font-size: 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+  }
+
+  .nav-btn:hover {
+    background-color: rgba(255, 255, 255, 0.9);
+    transform: scale(1.05);
+  }
+
+  .nav-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
   }
 
   .values-list {
@@ -524,15 +603,21 @@
   .core-title {
     font-size: 2.5rem;
   }
+
+  .nav-buttons {
+    top: 40%;
+  }
 }
 
 @media (max-width: 480px) {
   .section {
     padding: 3rem 1rem;
   }
+
   .services-section {
     margin-bottom: -5rem;
   }
+
   .services-grid {
     gap: 2rem;
   }
@@ -552,5 +637,11 @@
 
   .core-title {
     font-size: 2rem;
+  }
+
+  .nav-btn {
+    width: 32px;
+    height: 32px;
+    font-size: 16px;
   }
 }

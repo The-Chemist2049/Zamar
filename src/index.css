@@ -1,12 +1,13 @@
 /* Import Google Fonts for Work Sans and Playfair Display */
 @import url("https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;500;600&family=Playfair+Display:wght@400;500;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap");
 
 /* CSS variables for colors */
 :root {
   --primary-accent: #ff6b00; /* Orange accent */
-  --dark-text: #222;
-  --medium-text: #555;
-  --light-text: #777;
+  --dark-text: #242a58;
+  --medium-text: #aeb0b1;
+  --light-text: #333;
   --white: #ffffff;
   --overlay: rgba(0, 0, 0, 0.7);
 }
@@ -14,7 +15,7 @@
 /* Global reset */
 * {
   margin: 0;
-  padding: 0;
+
   box-sizing: border-box;
 }
 
@@ -23,18 +24,23 @@
   font-size: 2.5rem;
   font-weight: 700;
   color: #ffffff;
-  margin-bottom: 1rem;
+  margin-bottom: 0.3rem;
   text-transform: capitalize;
-  font-family: "Playfair Display", serif;
+  font-family: "Work Sans", sans-serif;
   text-align: left;
+  padding-bottom: 1rem;
 }
 
 .hero-description {
-  font-size: 1.3rem;
+  font-size: 1rem;
   color: #ffffff;
-  line-height: 1.4;
-  max-width: 600px;
+  line-height: 1.9;
   text-align: left;
+  font-family: "Poppins", Helvetica, sans-serif;
+  font-weight: 400;
+  max-width: 800px; /* controls the width */
+  margin: 0 0; /* centers it horizontally */
+  padding-bottom: 2rem;
 }
 
 /* Body and default font */
@@ -80,6 +86,7 @@ h3 {
   font-weight: 600;
   line-height: 1.4;
   margin-bottom: 1rem;
+  color: var(--dark-text);
 }
 
 p {
@@ -95,7 +102,7 @@ p {
 /* Button styles */
 .button1 {
   display: inline-block;
-  padding: 0.75rem 1.5rem;
+  padding: 0.55rem 1.5rem;
   font-family: "Work Sans", sans-serif;
   font-size: 1rem;
   font-weight: 500;
@@ -104,12 +111,14 @@ p {
   background-color: var(--primary-accent); /* #ff6b00 */
   border: 2px solid var(--primary-accent);
   border-radius: 1px;
+  height: auto;
   transition: background-color 0.3s ease, color 0.3s ease,
     border-color 0.3s ease, transform 0.2s ease;
 }
 
 .button1:hover {
-  background-color: var(--white);
+  background-color: transparent;
+
   color: var(--primary-accent); /* #ff6b00 */
   border: 2px solid var(--primary-accent);
   transform: translateY(-2px);
@@ -121,14 +130,16 @@ p {
 
 .button2 {
   display: inline-block;
-  padding: 0.75rem 1.5rem;
+  padding: 0.55rem 1.5rem;
   font-family: "Work Sans", sans-serif;
   font-size: 1rem;
   font-weight: 500;
   text-decoration: none;
   color: var(--primary-accent); /* #ff6b00 */
-  background-color: var(--white);
-  border: 2px solid var(--white);
+  background-color: transparent;
+
+  border: 2px solid var(--primary-accent);
+
   border-radius: 1px;
   transition: background-color 0.3s ease, color 0.3s ease,
     border-color 0.3s ease, transform 0.2s ease;
@@ -137,7 +148,7 @@ p {
 .button2:hover {
   background-color: var(--primary-accent); /* #ff6b00 */
   color: var(--white);
-  border: 2px solid var(--white);
+  border: 2px solid var(--primary-accent);
   transform: translateY(-2px);
 }
 
