@@ -1,7 +1,7 @@
-import React, { useEffect, useMemo } from "react";
-import { useLocation, useSearchParams } from "react-router-dom";
-import ProjectCategorySide from "../../components/Navbar/project-category-side";
+import React, { useEffect, useMemo, useState } from "react";
+import { useSearchParams } from "react-router-dom";
 import { Image, Text, Title } from "@mantine/core";
+import ProjectCategorySide from "../../components/Navbar/project-category-side";
 import pb from "../../libs/instances/pocketbase";
 import { useStore } from "zustand/react";
 import DynamicContentStore from "../../libs/dynamic_content";
@@ -9,85 +9,91 @@ import "./Projects.css";
 
 const Projects = () => {
   const [searchParams] = useSearchParams();
-  const location = useLocation();
-
   const category = searchParams.get("category")?.toLowerCase() || "all";
   const sub = searchParams.get("sub")?.toLowerCase();
 
   const { subs, fill } = useStore(DynamicContentStore);
-  const [projects, setProjects] = React.useState([]);
-  const [subcategories, setSubcategories] = React.useState([]);
-  const [services, setServices] = React.useState([]);
+  const [data, setData] = useState({
+    projects: [],
+    subcategories: [],
+    services: [],
+  });
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const subcats = await pb.collection("Subcategory").getList();
-        const servs = await pb
-          .collection("services")
-          .getList(0, 50, { expand: "sub_categories" });
-        const projs = await pb
-          .collection("Projects")
-          .getList(undefined, undefined, {
+        const [subcats, servs, projs] = await Promise.all([
+          pb.collection("Subcategory").getList(),
+          pb
+            .collection("services")
+            .getList(0, 50, { expand: "sub_categories" }),
+          pb.collection("Projects").getList(undefined, undefined, {
             expand: "client,category,subcategory",
-          });
+          }),
+        ]);
 
-        setSubcategories(subcats.items);
-        setServices(servs.items);
-        setProjects(projs.items);
+        const subcatItems = subcats.items;
+        const serviceItems = servs.items;
+        const projectItems = projs.items;
 
-        fill("projects", projs.items);
-        fill("subs", subcats.items);
-        fill("services", servs.items);
+        setData({
+          projects: projectItems,
+          subcategories: subcatItems,
+          services: serviceItems,
+        });
+
+        fill("projects", projectItems);
+        fill("subs", subcatItems);
+        fill("services", serviceItems);
       } catch (error) {
         console.error("Failed to fetch project data:", error);
       }
     };
 
     fetchData();
-  }, []);
+  }, [fill]);
 
   const filteredProjects = useMemo(() => {
-    if (!projects) return [];
-    if (!category || category === "all") return projects;
-
-    return projects
-      .filter((f) => f.expand.category.title.toLowerCase().includes(category))
-      .filter((f) => {
+    return data.projects
+      .filter((project) => {
+        const projectCategory = project?.expand?.category?.title?.toLowerCase();
+        return category === "all" || projectCategory?.includes(category);
+      })
+      .filter((project) => {
         if (!sub) return true;
-        const subCategory = subs.get(f.subcategory);
-        if (!subCategory) return true;
-        return subCategory.subcategory.toLowerCase() === sub;
+        const subCategory = subs.get(project.subcategory);
+        return subCategory?.subcategory?.toLowerCase() === sub;
       });
-  }, [category, sub, projects]);
+  }, [category, sub, data.projects, subs]);
 
   return (
     <div className="projects-container">
       <ProjectCategorySide />
       <div className="projects-content">
-        {filteredProjects.length < 1 && (
+        {filteredProjects.length === 0 ? (
           <Text className="empty-message">
             Nothing to show in this category, we're working to show you more
             soon 😊
           </Text>
-        )}
-        {filteredProjects.map((item, i) => (
-          <div className="project-section" key={i}>
-            <Title c="primary" order={3}>
-              {item.expand.client.name}
-            </Title>
-            <div className="image-grid">
-              {item.images.map((image, k) => (
-                <Image
-                  key={k}
-                  src={`${pb.baseURL}/api/files/${item.collectionId}/${item.id}/${image}`}
-                  className="project-image"
-                  alt={`Project ${item.expand.client.name}`}
-                />
-              ))}
+        ) : (
+          filteredProjects.map((item, i) => (
+            <div className="project-section" key={i}>
+              <Title c="primary" order={3}>
+                {item?.expand?.client?.name ?? "Unnamed Client"}
+              </Title>
+              <div className="image-grid">
+                {item.images?.map((image, k) => (
+                  <Image
+                    key={k}
+                    src={`${pb.baseURL}/api/files/${item.collectionId}/${item.id}/${image}`}
+                    className="project-image"
+                    alt={`Project ${item?.expand?.client?.name ?? "Image"}`}
+                  />
+                ))}
+              </div>
             </div>
-          </div>
-        ))}
+          ))
+        )}
       </div>
     </div>
   );

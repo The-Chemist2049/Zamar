@@ -8,21 +8,24 @@ import About from "../src/pages/About/About";
 import Services from "../src/pages/Services/Services";
 import Projects from "../src/pages/Projects/Project";
 import Contact from "../src/pages/Contact/Contact";
+import ProductPage from "./pages/Projects/ProjectPage";
 
 function App() {
   return (
-    <Router>
-      <ScrollToTop />
-      <Routes>
-        <Route path="/" element={<Layout />}>
-          <Route index element={<Home />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/services" element={<Services />} />
-          <Route path="/projects" element={<Projects />} />
-          <Route path="/contact" element={<Contact />} />
-        </Route>
-      </Routes>
-    </Router>
+    <ProductPage />
+
+    // <Router>
+    //   <ScrollToTop />
+    //   <Routes>
+    //     <Route path="/" element={<Layout />}>
+    //       <Route index element={<Home />} />
+    //       <Route path="/about" element={<About />} />
+    //       <Route path="/services" element={<Services />} />
+    //       <Route path="/projects" element={<Projects />} />
+    //       <Route path="/contact" element={<Contact />} />
+    //     </Route>
+    //   </Routes>
+    // </Router>
   );
 }
 
