@@ -57,12 +57,14 @@
 @media (max-width: 768px) {
   .value-card {
     flex-direction: column;
+    margin: 0;
     align-items: center;
-    width: 100%;
-    max-width: 100%; 
+    width: fit-content;
+    /* background-color: red; */
+    /* max-width: 100%;  */
     min-width: unset; 
     padding: 1.5rem 1rem; 
-    margin: 0 auto;  
+    /* margin: 0 auto;   */
     box-sizing: border-box; /
   }
 

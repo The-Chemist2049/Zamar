@@ -1,12 +1,13 @@
 /* Import Google Fonts for Work Sans and Playfair Display */
 @import url("https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;500;600&family=Playfair+Display:wght@400;500;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap");
 
 /* CSS variables for colors */
 :root {
   --primary-accent: #ff6b00; /* Orange accent */
-  --dark-text: #222;
-  --medium-text: #555;
-  --light-text: #777;
+  --dark-text: #242a58;
+  --medium-text: #aeb0b1;
+  --light-text: #333;
   --white: #ffffff;
   --overlay: rgba(0, 0, 0, 0.7);
 }
@@ -14,7 +15,7 @@
 /* Global reset */
 * {
   margin: 0;
-  padding: 0;
+
   box-sizing: border-box;
 }
 
@@ -23,18 +24,23 @@
   font-size: 2.5rem;
   font-weight: 700;
   color: #ffffff;
-  margin-bottom: 1rem;
+  margin-bottom: 0.3rem;
   text-transform: capitalize;
-  font-family: "Playfair Display", serif;
+  font-family: "Work Sans", sans-serif;
   text-align: left;
+  padding-bottom: 1rem;
 }
 
 .hero-description {
-  font-size: 1.3rem;
+  font-size: 1rem;
   color: #ffffff;
-  line-height: 1.4;
-  max-width: 600px;
+  line-height: 1.9;
   text-align: left;
+  font-family: "Poppins", Helvetica, sans-serif;
+  font-weight: 400;
+  max-width: 800px; /* controls the width */
+  margin: 0 0; /* centers it horizontally */
+  padding-bottom: 2rem;
 }
 
 /* Body and default font */
@@ -80,6 +86,7 @@ h3 {
   font-weight: 600;
   line-height: 1.4;
   margin-bottom: 1rem;
+  color: var(--dark-text);
 }
 
 p {
@@ -95,24 +102,23 @@ p {
 /* Button styles */
 .button1 {
   display: inline-block;
-  padding: 0.75rem 1.5rem;
-  font-family: "Work Sans", sans-serif;
-  font-size: 1rem;
-  font-weight: 500;
+  padding: 0.8rem 1.8rem;
+  border-radius: 100px;
+  background-color: #242a58;
+  color: white;
   text-decoration: none;
-  color: var(--white);
-  background-color: var(--primary-accent); /* #ff6b00 */
-  border: 2px solid var(--primary-accent);
-  border-radius: 1px;
-  transition: background-color 0.3s ease, color 0.3s ease,
-    border-color 0.3s ease, transform 0.2s ease;
+  font-weight: 500;
+  font-size: 1rem;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
 }
 
 .button1:hover {
-  background-color: var(--white);
-  color: var(--primary-accent); /* #ff6b00 */
-  border: 2px solid var(--primary-accent);
-  transform: translateY(-2px);
+  transform: translateY(-8px) scale(1.03);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+  background-color: #222;
+  color: #fff;
 }
 
 .button1:active {
@@ -121,24 +127,23 @@ p {
 
 .button2 {
   display: inline-block;
-  padding: 0.75rem 1.5rem;
-  font-family: "Work Sans", sans-serif;
-  font-size: 1rem;
-  font-weight: 500;
+  padding: 0.8rem 1.8rem;
+  border-radius: 30px;
+  color: #ff6b00;
   text-decoration: none;
-  color: var(--primary-accent); /* #ff6b00 */
-  background-color: var(--white);
-  border: 2px solid var(--white);
-  border-radius: 1px;
-  transition: background-color 0.3s ease, color 0.3s ease,
-    border-color 0.3s ease, transform 0.2s ease;
+  font-weight: 500;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background: transparent;
+  border: 4px solid #242a58;
 }
 
 .button2:hover {
-  background-color: var(--primary-accent); /* #ff6b00 */
-  color: var(--white);
-  border: 2px solid var(--white);
-  transform: translateY(-2px);
+  transform: translateY(-8px) scale(1.03);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+  background-color: transparent;
+  color: #fff;
 }
 
 .button2:active {

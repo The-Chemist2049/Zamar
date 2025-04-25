@@ -1,12 +1,10 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { useStore } from "zustand/react";
 import DynamicContentStore from "../../libs/dynamic_content";
 import HeroSection from "../../components/HeroSection/HeroSection";
 import ServiceCard from "../../components/ServiceCard/ServiceCard";
 import TestimonialCard from "../../components/TestimonialCard/TestimonialCard";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { services } from "../../data/Services";
 import { testimonials } from "../../data/testimonials";
 import "./Home.css";
@@ -14,26 +12,53 @@ import ValueCard from "../../components/CoreSection/ValueCard";
 import { Flex, Title } from "@mantine/core";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-
-// Register ScrollTrigger plugin
-gsap.registerPlugin(ScrollTrigger);
+import { s } from "framer-motion/client";
 
 const Home = () => {
   const navigate = useNavigate();
   const [clients, setClients] = React.useState([]);
+  const [loading, setLoading] = useState(true); // Add loading state
+  const [activeValueIndex, setActiveValueIndex] = useState(0);
+  const [activeTestimonialIndex, setActiveTestimonialIndex] = useState(0);
+  const valuesRowRef = useRef(null);
+  const testimonialsSliderRef = useRef(null);
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+
+  // Check if the screen is mobile
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
   // Fetch data from the API
   useEffect(() => {
-    const baseUrl = "https://zamar.pockethost.io/";
-
     const clientLogos = async () => {
+      setLoading(true); // Set loading to true before fetching
       try {
         const response = await axios.get(
-          `${baseUrl}api/collections/Clients/records`
+          "https://zamarsolutions.co.ke/Zamar/api/get_images.php"
         );
-        setClients(response.data.items);
-        // assuming the data has an 'items' array
+        const items = response.data;
+
+        if (!Array.isArray(items)) {
+          console.error("Expected an array but got:", items);
+          setLoading(false); // Turn off loading on error
+          return [];
+        }
+
+        const filtered = items.filter((item) => item.category === "Client");
+        setClients(filtered);
+        setLoading(false); // Turn off loading when data is received
       } catch (error) {
         console.error("Error fetching client logos:", error);
+        setLoading(false); // Turn off loading on error
+        return [];
       }
     };
 
@@ -41,62 +66,6 @@ const Home = () => {
   }, []);
 
   const store = useStore(DynamicContentStore);
-
-  // Set up GSAP animations
-  useEffect(() => {
-    // Service card animations
-    const animateServiceCards = () => {
-      const serviceCards = document.querySelectorAll(".service-cad");
-
-      serviceCards.forEach((card, index) => {
-        gsap.fromTo(
-          card,
-          {
-            x: -50,
-            opacity: 0,
-            rotateY: 45,
-          },
-          {
-            x: 0,
-            opacity: 1,
-            rotateY: 0,
-            duration: 1,
-            ease: "power3.out",
-            delay: index * 0.3,
-          }
-        );
-      });
-    };
-
-    const resetServiceCards = () => {
-      const serviceCards = document.querySelectorAll(".service-cad");
-      serviceCards.forEach((card, index) => {
-        gsap.set(card, {
-          x: index % 2 === 0 ? -50 : 50,
-          opacity: 0,
-          rotateY: 45,
-        });
-      });
-    };
-
-    // Set up scroll triggers
-    if (document.querySelectorAll(".service-cad").length > 0) {
-      ScrollTrigger.create({
-        trigger: ".services-section",
-        start: "top bottom-=100",
-        end: "bottom center",
-        onEnter: animateServiceCards,
-        onEnterBack: animateServiceCards,
-        onLeave: resetServiceCards,
-        onLeaveBack: resetServiceCards,
-      });
-    }
-
-    // Clean up on unmount
-    return () => {
-      ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
-    };
-  }, []);
 
   // Initialize sample values
   useEffect(() => {
@@ -127,6 +96,92 @@ const Home = () => {
   // Get values from store
   const values = [...store.values.values()];
 
+  // Scroll to specific value card - only active in mobile mode
+  const scrollToValueCard = (index) => {
+    if (isMobile && valuesRowRef.current) {
+      const cards = valuesRowRef.current.querySelectorAll(
+        ".value-card-wrapper"
+      );
+      if (cards[index]) {
+        cards[index].scrollIntoView({
+          behavior: "smooth",
+          inline: "center",
+          block: "nearest",
+        });
+        setActiveValueIndex(index);
+      }
+    }
+  };
+
+  // Scroll to specific testimonial card - only active in mobile mode
+  const scrollToTestimonialCard = (index) => {
+    if (isMobile && testimonialsSliderRef.current) {
+      const cards = testimonialsSliderRef.current.querySelectorAll(
+        ".testimonial-card-wrapper"
+      );
+      if (cards[index]) {
+        cards[index].scrollIntoView({
+          behavior: "smooth",
+          inline: "center",
+          block: "nearest",
+        });
+        setActiveTestimonialIndex(index);
+      }
+    }
+  };
+
+  // Handle values carousel scroll - only in mobile mode
+  const handleValuesScroll = () => {
+    if (isMobile && valuesRowRef.current) {
+      const scrollLeft = valuesRowRef.current.scrollLeft;
+      const cardWidth =
+        valuesRowRef.current.querySelector(".value-card-wrapper")
+          ?.offsetWidth || 0;
+      const gap = 16; // Approximated from your CSS
+
+      const newIndex = Math.round(scrollLeft / (cardWidth + gap));
+      if (
+        newIndex !== activeValueIndex &&
+        newIndex >= 0 &&
+        newIndex < values.length
+      ) {
+        setActiveValueIndex(newIndex);
+      }
+    }
+  };
+
+  // Handle testimonials carousel scroll - only in mobile mode
+  const handleTestimonialsScroll = () => {
+    if (isMobile && testimonialsSliderRef.current) {
+      const scrollLeft = testimonialsSliderRef.current.scrollLeft;
+      const cardWidth =
+        testimonialsSliderRef.current.querySelector(".testimonial-card-wrapper")
+          ?.offsetWidth || 0;
+      const gap = 40; // Approximated from your CSS
+
+      const newIndex = Math.round(scrollLeft / (cardWidth + gap));
+      if (
+        newIndex !== activeTestimonialIndex &&
+        newIndex >= 0 &&
+        newIndex < testimonials.length
+      ) {
+        setActiveTestimonialIndex(newIndex);
+      }
+    }
+  };
+
+  // Loading Spinner Component
+  const LoadingSpinner = () => (
+    <div className="spinner-container">
+      <div className="spinner">
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+      <div className="spinner-text">Loading clients...</div>
+    </div>
+  );
+
   return (
     <>
       <HeroSection />
@@ -134,22 +189,63 @@ const Home = () => {
         <Title order={2} className="core-title">
           At Our Core
         </Title>
-        <div className="values-row">
-          {values.map((value) => (
-            <ValueCard value={value} key={value.id} />
-          ))}
+        <div className="carousel-container">
+          {isMobile && (
+            <div className="nav-buttons values-nav-buttons">
+              <button
+                className="nav-btn prev-btn"
+                onClick={() => scrollToValueCard(activeValueIndex - 1)}
+                disabled={activeValueIndex === 0}
+              >
+                ←
+              </button>
+              <button
+                className="nav-btn next-btn"
+                onClick={() => scrollToValueCard(activeValueIndex + 1)}
+                disabled={activeValueIndex === values.length - 1}
+              >
+                →
+              </button>
+            </div>
+          )}
+
+          <div
+            className="values-row carousel"
+            ref={valuesRowRef}
+            onScroll={isMobile ? handleValuesScroll : undefined}
+          >
+            {values.map((value, index) => (
+              <div key={value.id} className="value-card-wrapper">
+                <ValueCard value={value} />
+              </div>
+            ))}
+          </div>
+
+          {isMobile && (
+            <div className="indicators values-indicators">
+              {values.map((_, index) => (
+                <div
+                  key={index}
+                  className={`indicator ${
+                    index === activeValueIndex ? "active" : ""
+                  }`}
+                  onClick={() => scrollToValueCard(index)}
+                />
+              ))}
+            </div>
+          )}
         </div>
       </div>
 
       <section className="section services-section">
         <div className="container">
           <h2 className="section-title">Our Services</h2>
-          <div className="services-grid">
+          <div className="services-grid1">
             {services.slice(0, 3).map((service, index) => (
               <div key={index} className="service-card-wrapper">
                 <ServiceCard
-                  image={service.image} // ✅ NEW
-                  icon={service.icon} // ✅ fallback if image is not present
+                  image={service.image}
+                  icon={service.icon}
                   title={service.title}
                   description={service.description}
                   className="service-card"
@@ -171,42 +267,84 @@ const Home = () => {
       <section className="section clients-section">
         <div className="container">
           <h2 className="section-title">Our Clients</h2>
-          <div className="clients-grid">
-            {clients.map((client, index) => (
-              <div key={index} className="client-logo">
-                <img
-                  src={`https://zamar.pockethost.io/api/files/Clients/${client.id}/${client.logo}`}
-                  alt={client.name}
-                />
-              </div>
-            ))}
+          {loading ? (
+            <LoadingSpinner />
+          ) : (
+            <div className="clients-grid">
+              {clients.map((client, index) => (
+                <div key={index} className="client-logo">
+                  <img src={client.image_URL} alt={client.name} />
+                </div>
+              ))}
 
-            {clients.map((client, index) => (
-              <div key={`dup-${index}`} className="client-logo">
-                <img
-                  src={`https://zamar.pockethost.io/api/files/Clients/${client.id}/${client.logo}`}
-                  alt={client.name}
-                />
-              </div>
-            ))}
-          </div>
+              {clients.map((client, index) => (
+                <div key={`dup-${index}`} className="client-logo">
+                  <img src={client.image_URL} alt={client.name} />
+                </div>
+              ))}
+            </div>
+          )}
         </div>
       </section>
 
       <section className="section testimonials-section">
         <div className="container">
           <h2 className="section-title">What Our Clients Say</h2>
-          <div className="testimonials-slider">
-            {testimonials.map((testimonial, index) => (
-              <TestimonialCard
-                key={index}
-                text={testimonial.text}
-                name={testimonial.name}
-                position={testimonial.position}
-                company={testimonial.company}
-                image={testimonial.image}
-              />
-            ))}
+          <div className="carousel-container testimonials-carousel-container">
+            {isMobile && (
+              <div className="nav-buttons testimonials-nav-buttons">
+                <button
+                  className="nav-btn prev-btn"
+                  onClick={() =>
+                    scrollToTestimonialCard(activeTestimonialIndex - 1)
+                  }
+                  disabled={activeTestimonialIndex === 0}
+                >
+                  ←
+                </button>
+                <button
+                  className="nav-btn next-btn"
+                  onClick={() =>
+                    scrollToTestimonialCard(activeTestimonialIndex + 1)
+                  }
+                  disabled={activeTestimonialIndex === testimonials.length - 1}
+                >
+                  →
+                </button>
+              </div>
+            )}
+
+            <div
+              className="testimonials-slider carousel"
+              ref={testimonialsSliderRef}
+              onScroll={isMobile ? handleTestimonialsScroll : undefined}
+            >
+              {testimonials.map((testimonial, index) => (
+                <div key={index} className="testimonial-card-wrapper">
+                  <TestimonialCard
+                    text={testimonial.text}
+                    name={testimonial.name}
+                    position={testimonial.position}
+                    company={testimonial.company}
+                    image={testimonial.image}
+                  />
+                </div>
+              ))}
+            </div>
+
+            {isMobile && (
+              <div className="indicators testimonials-indicators">
+                {testimonials.map((_, index) => (
+                  <div
+                    key={index}
+                    className={`indicator ${
+                      index === activeTestimonialIndex ? "active" : ""
+                    }`}
+                    onClick={() => scrollToTestimonialCard(index)}
+                  />
+                ))}
+              </div>
+            )}
           </div>
         </div>
       </section>
@@ -219,7 +357,8 @@ const Home = () => {
               Get in touch with us today and let's create impactful marketing
               solutions together.
             </p>
-            <Link to="/contact" className="btn btn-large">
+
+            <Link to="/contact" className="btn">
               Contact Us
             </Link>
           </div>

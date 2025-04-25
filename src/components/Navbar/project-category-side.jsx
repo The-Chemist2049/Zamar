@@ -76,6 +76,7 @@ const ProjectCategorySide = () => {
           All Projects
         </Button>
       </Link>,
+
       ...servicesArray.map((service) => {
         const isServiceOpen = isOpen(service.title);
         const hasSubcategories = service.sub_categories.length > 0;

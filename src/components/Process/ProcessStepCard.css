@@ -1,0 +1,32 @@
+.process-step {
+  position: relative;
+  text-align: left;
+  padding: 2rem 2rem 2rem 3rem;
+  background-color: #ffffff;
+  border-radius: 1px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.step-number {
+  font-family: "Work Sans", sans-serif;
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #f15a2a;
+  margin-bottom: 1rem;
+}
+
+.process-step::before {
+  content: "";
+  position: absolute;
+  left: 1rem;
+  top: 1rem;
+  width: 2px;
+  height: 20%;
+  background: #f15a2a;
+}
+
+.process-step:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+}

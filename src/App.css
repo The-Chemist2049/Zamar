@@ -49,7 +49,7 @@ body {
   display: inline-block;
   padding: 0.8rem 1.8rem;
   border-radius: 30px;
-  background-color: #ff6b00;
+  background-color: #242a58;
   color: white;
   text-decoration: none;
   font-weight: 600;
@@ -59,13 +59,13 @@ body {
 }
 
 .btn:hover {
-  background-color: #e05a00;
+  background-color: #242a54;
   transform: translateY(-3px);
 }
 
 .btn-outline {
   background-color: transparent;
-  border: 2px solid #ff6b00;
+  border: 2px solid #242a58;
   color: #ff6b00;
 }
 
