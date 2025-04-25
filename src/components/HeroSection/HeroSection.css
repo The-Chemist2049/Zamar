@@ -161,26 +161,27 @@ body {
 }
 
 .btn {
-  padding: 1rem 2rem;
-  border-radius: 12px;
-  font-weight: 600;
-  text-decoration: none;
-  font-size: 1.1rem;
-  transition: all 0.3s ease;
-  background: linear-gradient(135deg, #ff416c, #ff4b2b);
+  display: inline-block;
+  padding: 0.8rem 1.8rem;
+  border-radius: 30px;
+  background-color: #242a58;
   color: white;
-  box-shadow: 0 8px 20px rgba(255, 75, 43, 0.3);
+  text-decoration: none;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
 }
 
 .btn-outline {
   background: transparent;
-  border: 2px solid #ff4b2b;
-  color: #ff4b2b;
+  border: 2px solid #242a58;
+  color: #333;
 }
 
 .btn:hover {
   transform: translateY(-4px);
-  box-shadow: 0 12px 25px rgba(255, 75, 43, 0.4);
+  box-shadow: 0 12px 25px #242a52;
 }
 
 /* Cube container */
@@ -191,7 +192,6 @@ body {
   justify-content: center;
   align-items: center;
   padding: 2rem;
-  /* animation: fadeInRight 1.3s ease-out; */
 }
 
 .dcontainer {
@@ -200,18 +200,11 @@ body {
   max-width: 600px;
   aspect-ratio: 1;
   border-radius: 20px;
-  /* background: rgba(255, 255, 255, 0.05); */
   backdrop-filter: blur(15px);
-  /* box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25); */
   display: flex;
   justify-content: center;
   align-items: center;
-  /* transition: transform 0.4s ease; */
 }
-
-/* .dcontainer:hover {
-  transform: scale(1.03);
-} */
 
 /* Animations */
 @keyframes fadeInLeft {

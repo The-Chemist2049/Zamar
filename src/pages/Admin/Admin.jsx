@@ -98,6 +98,7 @@ function Admin() {
               Digital Screen Marketing
             </option>
             <option value="Digital_Marketing">Digital Marketing</option>
+            <option value="Client">New Client</option>{" "}
           </select>
         </div>
 
