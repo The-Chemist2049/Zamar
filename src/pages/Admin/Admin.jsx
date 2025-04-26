@@ -28,9 +28,17 @@ function Admin() {
     }
   };
 
+  const resetForm = () => {
+    // Reset the file input by creating a reference and resetting its value
+    const fileInput = document.getElementById("image");
+    if (fileInput) fileInput.value = "";
+    setImage(null);
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
+    setMessage(""); // Clear any existing messages during submission
 
     try {
       // Create FormData to send file
@@ -42,8 +50,6 @@ function Admin() {
       if (image) {
         formData.append("image", image);
       }
-      await new Promise((resolve) => setTimeout(resolve, 1000));
-      setMessage("Upload successful!");
 
       const response = await axios.post(
         "https://zamarsolutions.co.ke/Zamar/index.php",
@@ -54,8 +60,10 @@ function Admin() {
           },
         }
       );
+
       if (response.status === 200) {
         setMessage("Upload successful!");
+        resetForm(); // Clear the image input after successful upload
       } else {
         setMessage("Upload failed. Please try again.");
       }

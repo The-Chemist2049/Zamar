@@ -81,34 +81,6 @@ const HeroSection = () => {
   useEffect(() => {
     const interval = setInterval(updateBackground, 50);
 
-    let touchStartX = 0;
-    const carouselWrapper = carouselRef.current.parentElement;
-
-    const handleTouchStart = (e) => {
-      touchStartX = e.touches[0].clientX;
-    };
-
-    const handleTouchEnd = (e) => {
-      const touchEndX = e.changedTouches[0].clientX;
-      const deltaX = touchEndX - touchStartX;
-
-      if (Math.abs(deltaX) > 50) {
-        const carousel = carouselRef.current;
-        let angle = parseFloat(
-          carousel.style.transform
-            ?.replace("rotateY(", "")
-            .replace("deg)", "") || "0"
-        );
-        angle += (deltaX > 0 ? -1 : 1) * (360 / images.length);
-        carousel.style.animation = "none";
-        carousel.style.transform = `rotateY(${angle}deg)`;
-        updateBackground();
-      }
-    };
-
-    carouselWrapper.addEventListener("touchstart", handleTouchStart);
-    carouselWrapper.addEventListener("touchend", handleTouchEnd);
-
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -125,8 +97,6 @@ const HeroSection = () => {
 
     return () => {
       clearInterval(interval);
-      carouselWrapper.removeEventListener("touchstart", handleTouchStart);
-      carouselWrapper.removeEventListener("touchend", handleTouchEnd);
       observer.disconnect();
     };
   }, []);
