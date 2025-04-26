@@ -11,7 +11,7 @@
   background-color: #fff;
   color: var(--text);
   min-height: 100vh;
-  margin-top: 50px;
+  /* margin-top: 50px; */
 }
 
 .zamar-header {
