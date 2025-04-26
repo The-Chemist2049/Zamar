@@ -28,12 +28,18 @@ function Admin() {
     }
   };
 
+  const resetForm = () => {
+    const fileInput = document.getElementById("image");
+    if (fileInput) fileInput.value = "";
+    setImage(null);
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
+    setMessage(""); // Clear any existing messages
 
     try {
-      // Create FormData to send file
       const formData = new FormData();
       formData.append("category", category);
       if (showSubcategory) {
@@ -42,8 +48,6 @@ function Admin() {
       if (image) {
         formData.append("image", image);
       }
-      await new Promise((resolve) => setTimeout(resolve, 1000));
-      setMessage("Upload successful!");
 
       const response = await axios.post(
         "https://zamarsolutions.co.ke/Zamar/index.php",
@@ -54,8 +58,10 @@ function Admin() {
           },
         }
       );
+
       if (response.status === 200) {
         setMessage("Upload successful!");
+        resetForm(); // Clear input after upload
       } else {
         setMessage("Upload failed. Please try again.");
       }
@@ -98,7 +104,7 @@ function Admin() {
               Digital Screen Marketing
             </option>
             <option value="Digital_Marketing">Digital Marketing</option>
-            <option value="Client">New Client</option>{" "}
+            <option value="Client">New Client</option>
           </select>
         </div>
 
@@ -118,7 +124,12 @@ function Admin() {
 
         <div className="form-group">
           <label htmlFor="image">Select Image:</label>
-          <input type="file" id="image" onChange={handleImageChange} required />
+          <input
+            type="file"
+            id="image"
+            onChange={handleImageChange}
+            required
+          />
         </div>
 
         <button type="submit" disabled={isSubmitting} className="submit-button">
