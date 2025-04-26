@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./Admin.css";
 import axios from "axios";
 
@@ -7,12 +7,27 @@ function Admin() {
   const [subcategory, setSubcategory] = useState("Indoor");
   const [image, setImage] = useState(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [message, setMessage] = useState("");
+  const [toast, setToast] = useState({ show: false, message: "", type: "" });
 
   // Check if subcategory should be shown
   const showSubcategory =
     category === "Brand_Activations" ||
     category === "Indoor_and_Outdoor_Branding";
+
+  // Handle toast display and auto-dismiss
+  useEffect(() => {
+    let toastTimer;
+    if (toast.show) {
+      toastTimer = setTimeout(() => {
+        setToast({ ...toast, show: false });
+      }, 3000); // Toast will disappear after 3 seconds
+    }
+    return () => clearTimeout(toastTimer);
+  }, [toast]);
+
+  const showToast = (message, type) => {
+    setToast({ show: true, message, type });
+  };
 
   const handleCategoryChange = (e) => {
     setCategory(e.target.value);
@@ -29,6 +44,7 @@ function Admin() {
   };
 
   const resetForm = () => {
+    // Reset the file input by creating a reference and resetting its value
     const fileInput = document.getElementById("image");
     if (fileInput) fileInput.value = "";
     setImage(null);
@@ -37,9 +53,9 @@ function Admin() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
-    setMessage(""); // Clear any existing messages
 
     try {
+      // Create FormData to send file
       const formData = new FormData();
       formData.append("category", category);
       if (showSubcategory) {
@@ -60,14 +76,14 @@ function Admin() {
       );
 
       if (response.status === 200) {
-        setMessage("Upload successful!");
-        resetForm(); // Clear input after upload
+        showToast("Upload successful!", "success");
+        resetForm(); // Clear the image input after successful upload
       } else {
-        setMessage("Upload failed. Please try again.");
+        showToast("Upload failed. Please try again.", "error");
       }
     } catch (error) {
       console.error("Error uploading file:", error);
-      setMessage("Error uploading. Please try again.");
+      showToast("Error uploading. Please try again.", "error");
     } finally {
       setIsSubmitting(false);
     }
@@ -77,13 +93,10 @@ function Admin() {
     <div className="upload-container">
       <h2>Upload an Image</h2>
 
-      {message && (
-        <div
-          className={`message ${
-            message.includes("successful") ? "success" : "error"
-          }`}
-        >
-          {message}
+      {/* Toast notification */}
+      {toast.show && (
+        <div className={`toast-notification ${toast.type}`}>
+          <div className="toast-message">{toast.message}</div>
         </div>
       )}
 
@@ -104,7 +117,7 @@ function Admin() {
               Digital Screen Marketing
             </option>
             <option value="Digital_Marketing">Digital Marketing</option>
-            <option value="Client">New Client</option>
+            <option value="Client">New Client</option>{" "}
           </select>
         </div>
 
@@ -124,12 +137,7 @@ function Admin() {
 
         <div className="form-group">
           <label htmlFor="image">Select Image:</label>
-          <input
-            type="file"
-            id="image"
-            onChange={handleImageChange}
-            required
-          />
+          <input type="file" id="image" onChange={handleImageChange} required />
         </div>
 
         <button type="submit" disabled={isSubmitting} className="submit-button">

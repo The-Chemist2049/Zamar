@@ -9,6 +9,7 @@ export default function ProductPage() {
   const [imagesByCategory, setImagesByCategory] = useState({});
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [popupImage, setPopupImage] = useState(null);
 
   const categories = [
     { name: "All", subcategories: [] },
@@ -68,6 +69,20 @@ export default function ProductPage() {
     fetchProducts();
   }, []);
 
+  useEffect(() => {
+    // Disable body scroll when popup is open
+    if (popupImage) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
+    }
+
+    // Cleanup function
+    return () => {
+      document.body.style.overflow = "auto";
+    };
+  }, [popupImage]);
+
   const handleCategoryClick = (category) => {
     setSelectedCategory(category);
     setSelectedSubcategory(null);
@@ -79,6 +94,14 @@ export default function ProductPage() {
 
   const handleSubcategoryClick = (subcategory) => {
     setSelectedSubcategory(subcategory);
+  };
+
+  const openImagePopup = (imageUrl) => {
+    setPopupImage(imageUrl);
+  };
+
+  const closeImagePopup = () => {
+    setPopupImage(null);
   };
 
   const renderImages = () => {
@@ -97,6 +120,7 @@ export default function ProductPage() {
                         src={url}
                         alt={`img-${i}`}
                         className="product-image"
+                        onClick={() => openImagePopup(url)}
                       />
                     </div>
                   ))}
@@ -122,7 +146,12 @@ export default function ProductPage() {
             {imgs.length > 0 ? (
               imgs.map((img, idx) => (
                 <div key={idx} className="product-card">
-                  <img src={img} alt={`img-${idx}`} className="product-image" />
+                  <img
+                    src={img}
+                    alt={`img-${idx}`}
+                    className="product-image"
+                    onClick={() => openImagePopup(img)}
+                  />
                 </div>
               ))
             ) : (
@@ -149,6 +178,7 @@ export default function ProductPage() {
                       src={img}
                       alt={`img-${idx}`}
                       className="product-image"
+                      onClick={() => openImagePopup(img)}
                     />
                   </div>
                 ))}
@@ -217,6 +247,21 @@ export default function ProductPage() {
           renderImages()
         )}
       </main>
+
+      {/* Image Popup */}
+      {popupImage && (
+        <div className="image-popup-overlay" onClick={closeImagePopup}>
+          <div
+            className="image-popup-content"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button className="close-popup" onClick={closeImagePopup}>
+              &times;
+            </button>
+            <img src={popupImage} alt="Full size" className="popup-image" />
+          </div>
+        </div>
+      )}
     </div>
   );
 }
