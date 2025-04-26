@@ -245,7 +245,7 @@ const Services = () => {
         transition={{ duration: 0.75, ease: "easeInOut", delay: 0.4 }}
       >
         <div className="container">
-          <h2 className="section-title">Our Process</h2>
+          <h2 className="section-title1">Our Process</h2>
           <div className="process-steps">
             {processSteps.map((stepData, index) => (
               <ProcessStepCard key={index} {...stepData} />

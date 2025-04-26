@@ -78,7 +78,13 @@
   margin-bottom: 50px;
   position: relative;
 }
-
+.section-title1 {
+  text-align: center;
+  font-size: 2.2rem;
+  margin-bottom: 50px;
+  position: relative;
+  color: #ffab66;
+}
 .section-title::after {
   content: "";
   position: absolute;

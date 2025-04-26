@@ -16,16 +16,47 @@ const Layout = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  useEffect(() => {
+    // Close menu on escape key
+    const handleEscape = (e) => {
+      if (e.key === "Escape") {
+        setMobileMenuOpen(false);
+      }
+    };
+
+    window.addEventListener("keydown", handleEscape);
+    return () => {
+      window.removeEventListener("keydown", handleEscape);
+    };
+  }, []);
+
   const toggleMobileMenu = () => {
     setMobileMenuOpen((prev) => !prev);
   };
+
+  // Close mobile menu when clicking outside
+  const handleOutsideClick = (e) => {
+    if (
+      mobileMenuOpen &&
+      e.target.closest(".navbar-links") === null &&
+      e.target.closest(".mobile-menu-toggle") === null
+    ) {
+      setMobileMenuOpen(false);
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener("click", handleOutsideClick);
+    return () => {
+      document.removeEventListener("click", handleOutsideClick);
+    };
+  }, [mobileMenuOpen]);
 
   return (
     <>
       <nav className={`navbar ${scrolled ? "scrolled" : ""}`}>
         <div className="navbar-container">
           <Link to="/" className="navbar-logo">
-            {/* logo here */}
             <img src="/logo.svg" alt="Logo" className="logo-img" />
             <span>ZAMAR</span> Solutions
           </Link>
