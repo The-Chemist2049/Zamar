@@ -223,7 +223,7 @@ const Contact = () => {
       >
         <h2>Contact Us Today!</h2>
         <p>
-          Make Your Next Event Unforgettable: Let Zamar Solutions Create a Show-Stopping Experience.
+        Make Your Brand Unforgettable: Zamar Solutions Crafts Epic Activations.
         </p>
       </motion.div>
     </motion.div>

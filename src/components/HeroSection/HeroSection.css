@@ -244,10 +244,6 @@ body {
   will-change: transform;
 }
 
-.carousel-3d:hover {
-  animation-play-state: paused;
-}
-
 .carousel-3d img {
   position: absolute;
   width: 160px;
