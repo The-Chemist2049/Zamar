@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import "./HeroSection.css";
 
@@ -26,6 +26,9 @@ const colors = [
 
 const HeroSection = () => {
   const carouselRef = useRef(null);
+  const [isPaused, setIsPaused] = useState(false);
+  const touchStartRef = useRef(null);
+  const touchMoveThreshold = 5; // Sensitivity for detecting movement
 
   const rgbToArray = (hex) => {
     const r = parseInt(hex.slice(1, 3), 16);
@@ -45,7 +48,7 @@ const HeroSection = () => {
         "0"
     );
     if (!carousel.style.transform) {
-      const time = (Date.now() / 20000) % 1; // 20s animation cycle
+      const time = (Date.now() / 20000) % 1;
       angle = time * 360;
     }
     angle = ((angle % 360) + 360) % 360;
@@ -78,28 +81,129 @@ const HeroSection = () => {
     }
   };
 
+  const pauseCarousel = (e) => {
+    if (!isPaused) {
+      setIsPaused(true);
+      if (carouselRef.current) {
+        carouselRef.current.style.animationPlayState = "paused";
+      }
+      
+      // Add the paused class to the clicked image
+      if (e && e.target) {
+        const images = carouselRef.current.querySelectorAll('img');
+        images.forEach(img => img.classList.remove('paused'));
+        e.target.classList.add('paused');
+      }
+      
+      // Store touch position for movement detection
+      if (e.touches) {
+        touchStartRef.current = {
+          x: e.touches[0].clientX,
+          y: e.touches[0].clientY,
+        };
+      } else if (e.clientX) {
+        touchStartRef.current = {
+          x: e.clientX,
+          y: e.clientY,
+        };
+      }
+    }
+  };
+
+  const resumeCarousel = () => {
+    if (isPaused) {
+      setIsPaused(false);
+      if (carouselRef.current) {
+        carouselRef.current.style.animationPlayState = "running";
+        
+        // Remove paused class from all images
+        const images = carouselRef.current.querySelectorAll('img');
+        images.forEach(img => img.classList.remove('paused'));
+      }
+      touchStartRef.current = null;
+    }
+  };
+
+  const handleImageClick = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    pauseCarousel(e);
+  };
+  
+  const handleImageTouch = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    pauseCarousel(e);
+  };
+
+  const handleTouchMove = (e) => {
+    if (!touchStartRef.current || !isPaused) return;
+
+    const currentTouch = e.touches ? e.touches[0] : e;
+    const dx = Math.abs(currentTouch.clientX - touchStartRef.current.x);
+    const dy = Math.abs(currentTouch.clientY - touchStartRef.current.y);
+    
+    // If the user moves more than the threshold, resume the carousel
+    if (dx > touchMoveThreshold || dy > touchMoveThreshold) {
+      resumeCarousel();
+    }
+  };
+
+  const handleScroll = () => {
+    // Resume carousel on any scroll
+    if (isPaused) {
+      resumeCarousel();
+    }
+  };
+
+  const handleMouseMove = (e) => {
+    // If paused and there's previous touch position stored, check for movement
+    if (isPaused && touchStartRef.current) {
+      const dx = Math.abs(e.clientX - touchStartRef.current.x);
+      const dy = Math.abs(e.clientY - touchStartRef.current.y);
+      
+      if (dx > touchMoveThreshold || dy > touchMoveThreshold) {
+        resumeCarousel();
+      }
+    }
+  };
+
   useEffect(() => {
     const interval = setInterval(updateBackground, 50);
 
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          carouselRef.current.style.animationPlayState = entry.isIntersecting
-            ? "running"
-            : "paused";
+          if (!isPaused && carouselRef.current) {
+            carouselRef.current.style.animationPlayState = entry.isIntersecting
+              ? "running"
+              : "paused";
+          }
         });
       },
       { threshold: 0.1 }
     );
 
-    observer.observe(carouselRef.current);
+    if (carouselRef.current) {
+      observer.observe(carouselRef.current);
+    }
+    
     updateBackground();
 
+    // Add event listeners
+    window.addEventListener('touchmove', handleTouchMove, { passive: false });
+    window.addEventListener('wheel', handleScroll, { passive: true });
+    window.addEventListener('mousemove', handleMouseMove);
+    
+    // Cleanup function
     return () => {
       clearInterval(interval);
       observer.disconnect();
+      window.removeEventListener('touchmove', handleTouchMove);
+      window.removeEventListener('wheel', handleScroll);
+      window.removeEventListener('mousemove', handleMouseMove);
     };
-  }, []);
+  }, [isPaused]);
 
   return (
     <section className="hero">
@@ -130,38 +234,16 @@ const HeroSection = () => {
               aria-label="3D branding showcase carousel"
             >
               <div className="carousel-3d" id="carousel" ref={carouselRef}>
-                <img
-                  src={image1}
-                  alt="3D branding concept for product display"
-                  loading="lazy"
-                />
-                <img
-                  src={image2}
-                  alt="Branded vehicle for outdoor campaign"
-                  loading="lazy"
-                />
-                <img
-                  src={image3}
-                  alt="Outdoor advertising campaign"
-                  loading="lazy"
-                />
-                <img src={image4} alt="Instore branding setup" loading="lazy" />
-                <img
-                  src={image5}
-                  alt="Event activation display"
-                  loading="lazy"
-                />
-                <img src={image6} alt="Point-of-sale display" loading="lazy" />
-                <img
-                  src={image7}
-                  alt="Creative branding installation"
-                  loading="lazy"
-                />
-                <img
-                  src={image8}
-                  alt="Team executing branding project"
-                  loading="lazy"
-                />
+                {images.map((img, index) => (
+                  <img
+                    key={index}
+                    src={img}
+                    alt={`Branding showcase ${index + 1}`}
+                    loading="lazy"
+                    onClick={handleImageClick}
+                    onTouchStart={handleImageTouch}
+                  />
+                ))}
               </div>
             </div>
           </div>

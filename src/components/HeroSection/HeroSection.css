@@ -13,7 +13,7 @@ body {
 
 .hero {
   height: 100vh;
-  background: linear-gradient(135deg, #afb0b1 0%, #ffff 100%);
+  background: linear-gradient(135deg, #111111 50%, #222222 50%);
   position: relative;
   display: flex;
   align-items: center;
@@ -28,14 +28,8 @@ body {
   width: 100%;
   height: 100%;
   backdrop-filter: blur(5px);
-  background: rgba(0, 0, 0, 0.2);
+  background: rgba(0, 0, 0, 0.7);
   z-index: 0;
-}
-
-.hero-canvas {
-  width: 100%;
-  height: 100%;
-  border-radius: 20px;
 }
 
 .hero-container {
@@ -183,7 +177,6 @@ body {
   box-shadow: 0 12px 25px rgba(255, 75, 43, 0.4);
 }
 
-/* Cube container */
 .right {
   flex: 1;
   margin-top: 0rem;
@@ -191,39 +184,8 @@ body {
   justify-content: center;
   align-items: center;
   padding: 2rem;
-  /* animation: fadeInRight 1.3s ease-out; */
 }
 
-.dcontainer {
-  height: 100%;
-  width: 100%;
-  max-width: 600px;
-  aspect-ratio: 1;
-  border-radius: 20px;
-  /* background: rgba(255, 255, 255, 0.05); */
-  backdrop-filter: blur(15px);
-  /* box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25); */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  /* transition: transform 0.4s ease; */
-}
-
-/* .dcontainer:hover {
-  transform: scale(1.03);
-} */
-
-/* Animations */
-@keyframes fadeInLeft {
-  0% {
-    opacity: 0;
-    transform: translateX(-50px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
 .carousel-3d-wrapper {
   perspective: 1200px;
   width: 100%;
@@ -260,39 +222,37 @@ body {
   --index: 0;
   transform: rotateY(calc(360deg / var(--total) * var(--index)))
     translateZ(250px);
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+  -webkit-touch-callout: none;
+  user-select: none;
 }
 
-.carousel-3d img:hover {
+.carousel-3d img:hover,
+.carousel-3d img:active {
   transform: scale(1.1) rotateY(calc(360deg / var(--total) * var(--index)))
     translateZ(250px);
   z-index: 10;
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
 }
 
-.carousel-3d img:nth-child(1) {
-  --index: 0;
-} /* 1.jpg */
-.carousel-3d img:nth-child(2) {
-  --index: 1;
-} /* 2.jpg */
-.carousel-3d img:nth-child(3) {
-  --index: 2;
-} /* 3.jpg */
-.carousel-3d img:nth-child(4) {
-  --index: 3;
-} /* 4.jpg */
-.carousel-3d img:nth-child(5) {
-  --index: 4;
-} /* 5.jpg */
-.carousel-3d img:nth-child(6) {
-  --index: 5;
-} /* 6.jpg */
-.carousel-3d img:nth-child(7) {
-  --index: 6;
-} /* 7.jpg */
-.carousel-3d img:nth-child(8) {
-  --index: 7;
-} /* 8.jpg */
+.carousel-3d img.paused {
+  transform: scale(1.15) rotateY(calc(360deg / var(--total) * var(--index)))
+    translateZ(250px);
+  z-index: 10;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+  border: 2px solid #ff4b2b;
+}
+
+.carousel-3d img:nth-child(1) { --index: 0; }
+.carousel-3d img:nth-child(2) { --index: 1; }
+.carousel-3d img:nth-child(3) { --index: 2; }
+.carousel-3d img:nth-child(4) { --index: 3; }
+.carousel-3d img:nth-child(5) { --index: 4; }
+.carousel-3d img:nth-child(6) { --index: 5; }
+.carousel-3d img:nth-child(7) { --index: 6; }
+.carousel-3d img:nth-child(8) { --index: 7; }
 
 @keyframes rotate {
   from {
@@ -324,11 +284,6 @@ body {
   .hero-content p {
     font-size: 1.1rem;
   }
-
-  .dcontainer {
-    margin-top: 2rem;
-    transform: scale(0.9);
-  }
 }
 
 @media (max-width: 576px) {
@@ -355,7 +310,40 @@ body {
     text-align: center;
   }
 
-  .dcontainer {
-    transform: scale(0.85);
+  .carousel-3d {
+    width: 200px;
+    height: 200px;
+  }
+  /* Add these to your existing HeroSection.css */
+
+/* Add a visual indicator for when carousel is paused */
+.carousel-3d.paused {
+  animation-play-state: paused !important;
+}
+
+/* Style for the active/paused image */
+.carousel-3d img.paused {
+  transform: scale(1.15) rotateY(calc(360deg / var(--total) * var(--index)))
+    translateZ(250px);
+  z-index: 10;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+  border: 2px solid #ff4b2b;
+}
+
+/* For touch devices */
+@media (hover: none) and (pointer: coarse) {
+  .carousel-3d img:active {
+    transform: scale(1.1) rotateY(calc(360deg / var(--total) * var(--index)))
+      translateZ(250px);
+    z-index: 10;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+  }
+}
+  
+  .carousel-3d img {
+    width: 130px;
+    height: 160px;
+    margin-left: -65px;
+    margin-top: -80px;
   }
 }
