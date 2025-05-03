@@ -15,7 +15,7 @@ export const services = [
   },
   {
     icon: "icon-retail",
-    title: "Retail Marketing",
+    title: "Wall Branding",
     description:
       "Effective in-store marketing, merchandising, and point of sale materials to drive customer engagement.",
     image: "./images/retailmark.jpg",
@@ -32,14 +32,14 @@ export const services = [
     title: "Outdoor Advertising",
     description:
       "Impactful outdoor marketing through hoardings, billboards, and other external branding elements.",
-    image: "./images/outdoorads.jpg",
+    image: "./outdooradv.jpeg",
   },
   {
     icon: "icon-branding",
     title: "Corporate Branding",
     description:
       "Comprehensive branding solutions including wall branding, vehicle branding, and corporate identity development.",
-    image: "./images/coporatebrandi.jpg",
+    image: "./coporate1.jpg",
   },
   {
     icon: "icon-design",
@@ -61,7 +61,7 @@ export const services = [
     title: "Community Marketing",
     description:
       "Schools & clinic programs, tavern activations, and other community-focused marketing initiatives.",
-    image: "./car2.jpg",
+    image: "./car.jpg",
   },
 ];
 

@@ -12,7 +12,13 @@ import ValueCard from "../../components/CoreSection/ValueCard";
 import { Flex, Title } from "@mantine/core";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { s } from "framer-motion/client";
+import { motion } from "framer-motion";
+
+// Import icons for Why Choose Us section
+import expertiseIcon from "/icons/expertise.svg";
+import innovationIcon from "/icons/innovation.svg";
+import qualityIcon from "/icons/quality.svg";
+import supportIcon from "/icons/support.svg";
 
 const Home = () => {
   const navigate = useNavigate();
@@ -236,7 +242,6 @@ const Home = () => {
           )}
         </div>
       </div>
-
       <section className="section services-section">
         <div className="container">
           <h2 className="section-title">Our Services</h2>
@@ -263,7 +268,6 @@ const Home = () => {
           </div>
         </div>
       </section>
-
       <section className="section clients-section">
         <div className="container">
           <h2 className="section-title">Our Clients</h2>
@@ -287,68 +291,60 @@ const Home = () => {
         </div>
       </section>
 
-      <section className="section testimonials-section">
-        <div className="container">
-          <h2 className="section-title">What Our Clients Say</h2>
-          <div className="carousel-container testimonials-carousel-container">
-            {isMobile && (
-              <div className="nav-buttons testimonials-nav-buttons">
-                <button
-                  className="nav-btn prev-btn"
-                  onClick={() =>
-                    scrollToTestimonialCard(activeTestimonialIndex - 1)
-                  }
-                  disabled={activeTestimonialIndex === 0}
-                >
-                  ←
-                </button>
-                <button
-                  className="nav-btn next-btn"
-                  onClick={() =>
-                    scrollToTestimonialCard(activeTestimonialIndex + 1)
-                  }
-                  disabled={activeTestimonialIndex === testimonials.length - 1}
-                >
-                  →
-                </button>
+      {/* Why Choose Us section */}
+      <section className="why-choose-us-section">
+        <div className="why-us-container">
+          <h2 className="why-us-title">Why Choose Us</h2>
+          <div className="why-us-grid">
+            <div className="why-us-card">
+              <div className="why-icon-container">
+                <img src={expertiseIcon} alt="Expertise" className="why-icon" />
               </div>
-            )}
-
-            <div
-              className="testimonials-slider carousel"
-              ref={testimonialsSliderRef}
-              onScroll={isMobile ? handleTestimonialsScroll : undefined}
-            >
-              {testimonials.map((testimonial, index) => (
-                <div key={index} className="testimonial-card-wrapper">
-                  <TestimonialCard
-                    text={testimonial.text}
-                    name={testimonial.name}
-                    position={testimonial.position}
-                    company={testimonial.company}
-                    image={testimonial.image}
-                  />
-                </div>
-              ))}
+              <h3>Expertise</h3>
+              <p>
+                Our team of experienced professionals brings years of industry
+                knowledge to every project.
+              </p>
             </div>
-
-            {isMobile && (
-              <div className="indicators testimonials-indicators">
-                {testimonials.map((_, index) => (
-                  <div
-                    key={index}
-                    className={`indicator ${
-                      index === activeTestimonialIndex ? "active" : ""
-                    }`}
-                    onClick={() => scrollToTestimonialCard(index)}
-                  />
-                ))}
+            <div className="why-us-card">
+              <div className="why-icon-container">
+                <img
+                  src={innovationIcon}
+                  alt="Innovation"
+                  className="why-icon"
+                />
               </div>
-            )}
+              <h3>Innovation</h3>
+              <p>
+                We stay ahead of the curve with cutting-edge technology and
+                creative solutions.
+              </p>
+            </div>
+            <div className="why-us-card">
+              <div className="why-icon-container">
+                <img src={qualityIcon} alt="Quality" className="why-icon" />
+              </div>
+              <h3>Quality</h3>
+              <p>
+                We maintain the highest standards of quality in all our products
+                and services.
+              </p>
+            </div>
+            <div className="why-us-card">
+              <div className="why-icon-container">
+                <img src={supportIcon} alt="Support" className="why-icon" />
+              </div>
+              <h3>Support</h3>
+              <p>
+                Our dedicated support team is always ready to assist you with
+                any queries or issues.
+              </p>
+            </div>
           </div>
         </div>
       </section>
 
+      {/* CTA Section */}
       <section className="section cta-section">
         <div className="container">
           <div className="cta-content">
