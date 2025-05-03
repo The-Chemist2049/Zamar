@@ -4,9 +4,9 @@
 
 /* CSS variables for colors */
 :root {
-  --primary-accent: #ff6b00; /* Orange accent */
+  --primary-accent: #031536; /* Orange accent */
   --dark-text: #242a58;
-  --medium-text: #aeb0b1;
+  --medium-text: #000;
   --light-text: #333;
   --white: #ffffff;
   --overlay: rgba(0, 0, 0, 0.7);
@@ -17,18 +17,6 @@
   margin: 0;
 
   box-sizing: border-box;
-}
-
-/* Hero Section */
-.hero-heading {
-  font-size: 2.5rem;
-  font-weight: 700;
-  color: #ffffff;
-  margin-bottom: 0.3rem;
-  text-transform: capitalize;
-  font-family: "Work Sans", sans-serif;
-  text-align: left;
-  padding-bottom: 1rem;
 }
 
 .hero-description {

@@ -46,9 +46,13 @@
 .navbar.scrolled .logo-img {
   filter: brightness(1) invert(0);
 }
+.navbar.scrolled .navbar-logo span {
+  color: #242a58;
+}
 
 .navbar-logo span {
-  color: #ff6b00;
+  color: #ccc;
+  margin-right: 10px;
 }
 
 .navbar-links {
@@ -75,7 +79,7 @@
 
 .navbar-links a:hover,
 .navbar-links a.active {
-  color: #ff6b00;
+  color: #9453ad;
 }
 
 .navbar-links a.active:after {
@@ -85,7 +89,7 @@
   left: 0;
   width: 100%;
   height: 2px;
-  background-color: #ff6b00;
+  background-color: #9453ad;
 }
 
 .navbar.scrolled .navbar-links a {
@@ -94,7 +98,7 @@
 
 .navbar.scrolled .navbar-links a:hover,
 .navbar.scrolled .navbar-links a.active {
-  color: #ff6b00;
+  color: #9453ad;
 }
 
 .mobile-menu-toggle {
@@ -233,7 +237,7 @@
   .navbar.scrolled .navbar-links a.active,
   .navbar .navbar-links a:hover,
   .navbar .navbar-links a.active {
-    color: #ff6b00;
+    color: #9453ad;
   }
 }
 

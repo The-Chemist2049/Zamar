@@ -124,10 +124,6 @@ const Contact = () => {
               disabled={loading}
             ></textarea>
           </div>
-          {/* <div
-            className="g-recaptcha"
-            data-sitekey="6LcZzyErAAAAAO6saZeiidoNRveLOqDhcRG9B8JE"
-          ></div> */}
 
           <motion.button
             type="submit"

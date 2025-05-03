@@ -1,15 +1,15 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import "./HeroSection.css";
 
-import image1 from "../../assets/images/1.jpg";
-import image2 from "../../assets/images/2.jpg";
+import image1 from "../../assets/images/lucas.jpg";
+import image2 from "../../assets/images/car.jpg";
 import image3 from "../../assets/images/3.jpg";
-import image4 from "../../assets/images/4.jpg";
+import image4 from "../../assets/images/bottle.jpg";
 import image5 from "../../assets/images/5.jpg";
 import image6 from "../../assets/images/6.jpg";
 import image7 from "../../assets/images/7.jpg";
-import image8 from "../../assets/images/8.jpg";
+import image8 from "../../assets/images/pen.jpg";
 
 const images = [image1, image2, image3, image4, image5, image6, image7, image8];
 
@@ -26,6 +26,7 @@ const colors = [
 
 const HeroSection = () => {
   const carouselRef = useRef(null);
+  const [isPaused, setIsPaused] = useState(false);
 
   const rgbToArray = (hex) => {
     const r = parseInt(hex.slice(1, 3), 16);
@@ -84,9 +85,8 @@ const HeroSection = () => {
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          carouselRef.current.style.animationPlayState = entry.isIntersecting
-            ? "running"
-            : "paused";
+          carouselRef.current.style.animationPlayState =
+            entry.isIntersecting && !isPaused ? "running" : "paused";
         });
       },
       { threshold: 0.1 }
@@ -99,7 +99,14 @@ const HeroSection = () => {
       clearInterval(interval);
       observer.disconnect();
     };
-  }, []);
+  }, [isPaused]);
+
+  const handleCarouselClick = () => {
+    setIsPaused(!isPaused);
+    carouselRef.current.style.animationPlayState = isPaused
+      ? "running"
+      : "paused";
+  };
 
   return (
     <section className="hero">
@@ -128,6 +135,8 @@ const HeroSection = () => {
               className="carousel-3d-wrapper"
               role="region"
               aria-label="3D branding showcase carousel"
+              onClick={handleCarouselClick}
+              style={{ cursor: "pointer" }}
             >
               <div className="carousel-3d" id="carousel" ref={carouselRef}>
                 <img

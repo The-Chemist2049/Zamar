@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Contact Form</title>
+</head>
+<body>
+  <form id="contactForm">
+    <input type="text" name="name" placeholder="Your Name" required /><br />
+    <input type="email" name="email" placeholder="Your Email" required /><br />
+    <textarea name="message" placeholder="Your Message" required></textarea><br />
+    <button type="submit">Send</button>
+  </form>
+
+  <div id="response"></div>
+
+  <script>
+    document.getElementById("contactForm").onsubmit = async (e) => {
+      e.preventDefault();
+      const formData = new FormData(e.target);
+      const response = await fetch("send-mail.php", {
+        method: "POST",
+        body: formData,
+      });
+      const result = await response.json();
+      document.getElementById("response").innerText = result.message || result.error;
+    };
+  </script>
+</body>
+</html>

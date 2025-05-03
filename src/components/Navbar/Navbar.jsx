@@ -58,7 +58,7 @@ const Layout = () => {
         <div className="navbar-container">
           <Link to="/" className="navbar-logo">
             <img src="/logo.svg" alt="Logo" className="logo-img" />
-            <span>ZAMAR</span> Solutions
+            <span>Zamar</span> Solutions
           </Link>
 
           <div className="mobile-menu-toggle" onClick={toggleMobileMenu}>

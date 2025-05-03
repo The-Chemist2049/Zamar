@@ -2,7 +2,7 @@
 
 const impactData = [
   {
-    number: 120,
+    number: 150,
     suffix: "+",
     heading: "Projects Completed",
   },

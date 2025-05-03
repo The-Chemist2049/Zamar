@@ -59,7 +59,7 @@
 }
 
 .footer-logo span {
-  background: linear-gradient(135deg, #ff7e2e 0%, #ff9a5a 100%);
+  background: white;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -84,7 +84,7 @@
   bottom: -8px;
   width: 40px;
   height: 3px;
-  background: linear-gradient(90deg, #ff7e2e 0%, rgba(255, 154, 90, 0.5) 100%);
+  background: linear-gradient(90deg, #eeeef5 0%, rgba(255, 154, 90, 0.5) 100%);
   border-radius: 8px;
 }
 
@@ -152,6 +152,9 @@
 .social-icon.linkedin::before {
   background: linear-gradient(135deg, #0077b5 0%, #00a0dc 100%);
 }
+.social-icon.tiktok::before {
+  background: linear-gradient(135deg, #69c9d0 0%, #0c0003 50%, #010101 100%);
+}
 
 .social-icon.instagram::before {
   background: linear-gradient(
@@ -211,7 +214,7 @@
 }
 
 .footer-links a:hover {
-  color: #ff7e2e;
+  color: #0a94b6;
   padding-left: 14px;
 }
 
@@ -236,7 +239,7 @@
   width: 38px;
   background-color: rgba(255, 255, 255, 0.08);
   border-radius: 8px;
-  color: #ff7e2e;
+  color: #00060f;
   transition: all 0.3s ease;
 }
 
@@ -246,7 +249,7 @@
 }
 
 .contact-item:hover .contact-icon {
-  background: linear-gradient(135deg, #ff7e2e 0%, #ff9a5a 100%);
+  background: linear-gradient(135deg, #031942 0%, #3d48a5 100%);
   color: white;
   transform: translateY(-3px);
   box-shadow: 0 5px 15px rgba(255, 126, 46, 0.3);

@@ -31,9 +31,13 @@
   min-height: 400px;
   position: relative;
   animation: fadeIn 3s ease-out forwards;
-  opacity: 0; /* Ensures animation starts from invisible */
+  opacity: 0;
 }
-
+.company-content p {
+  max-width: 800px;
+  color: #000;
+  margin: 0 auto 2rem;
+}
 .about-hero::before {
   content: "";
   position: absolute;
