@@ -11,7 +11,7 @@ export const services = [
     title: "Street Activations",
     description:
       "Strategic street marketing campaigns to increase brand visibility and consumer engagement.",
-    image: "./images/streetact.jpg",
+    image: "./images/streetact.jpeg",
   },
   {
     icon: "icon-retail",
@@ -32,7 +32,7 @@ export const services = [
     title: "Outdoor Advertising",
     description:
       "Impactful outdoor marketing through hoardings, billboards, and other external branding elements.",
-    image: "./outdooradv.jpeg",
+    image: "./images/outdoorAdv.jpeg",
   },
   {
     icon: "icon-branding",
@@ -46,7 +46,7 @@ export const services = [
     title: "Design & Printing",
     description:
       "Creative design services and high-quality printing for all marketing materials.",
-    image: "./images/designprinting.jpg",
+    image: "./images/print.jpeg",
   },
 
   {

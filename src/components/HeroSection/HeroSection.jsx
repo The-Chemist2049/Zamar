@@ -3,12 +3,12 @@ import { Link } from "react-router-dom";
 import "./HeroSection.css";
 
 import image1 from "../../assets/images/lucas.jpg";
-import image2 from "../../assets/images/car.jpg";
-import image3 from "../../assets/images/3.jpg";
+import image5 from "../../assets/images/boardroom.jpeg";
+import image3 from "../../assets/images/lato.jpeg";
 import image4 from "../../assets/images/bottle.jpg";
-import image5 from "../../assets/images/5.jpg";
-import image6 from "../../assets/images/6.jpg";
-import image7 from "../../assets/images/7.jpg";
+import image2 from "../../assets/images/streetact.jpeg";
+import image6 from "../../assets/images/onfomobile.jpeg";
+import image7 from "../../assets/images/kapa.jpeg";
 import image8 from "../../assets/images/pen.jpg";
 
 const images = [image1, image2, image3, image4, image5, image6, image7, image8];
