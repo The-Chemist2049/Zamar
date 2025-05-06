@@ -13,7 +13,6 @@
   margin: 0 auto;
   margin-bottom: -3rem;
   padding: 1rem 0;
-  /* position: relative; */
 }
 
 .core-title {
@@ -143,33 +142,10 @@
   position: relative;
 }
 
-.view-more-container .btn {
-  display: inline-block;
-  padding: 0.8rem 1.8rem;
-  border-radius: 30px;
-  background-color: #242a58;
-  color: white;
-  text-decoration: none;
-  font-weight: 600;
-  border: none;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.view-more-container .btn:hover {
-  transform: translateY(-8px) scale(1.03);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
-  background-color: #222;
-}
-
-.view-more-container .btn:hover::before {
-  left: 100%;
-}
 /* ===== Why Choose Us Section ===== */
 .why-choose-us-section {
   margin-top: -6rem;
   padding: 5px 20px 20px 20px;
-  /* background-color: #04173f; */
   background: linear-gradient(135deg, #f8f9fa 0%, #edf2f7 100%);
   position: relative;
   overflow: hidden;
@@ -322,6 +298,7 @@
   animation: scroll 30s linear infinite;
   padding: 2rem 0;
 }
+
 .clients-section .spinner-container {
   display: flex;
   flex-direction: column;
@@ -370,6 +347,17 @@
   }
   100% {
     transform: translateX(-50%);
+  }
+}
+
+@keyframes bounce {
+  0%,
+  80%,
+  100% {
+    transform: scale(0);
+  }
+  40% {
+    transform: scale(1);
   }
 }
 
@@ -470,8 +458,67 @@
 }
 
 .btn-large {
-  padding: 1.4rem 4rem !important;
-  font-size: 1.2rem !important;
+  padding: 1.2rem 2rem !important;
+  font-size: 1rem !important;
+}
+
+/* ===== Service Card Skeleton Loading Effect ===== */
+.skeleton-card {
+  background: white;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  transition: all 0.3s ease;
+  padding: 0;
+}
+
+.skeleton-image {
+  height: 200px;
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  width: 100%;
+}
+
+.skeleton-content {
+  padding: 20px;
+}
+
+.skeleton-title {
+  height: 25px;
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: 4px;
+  margin-bottom: 15px;
+  width: 70%;
+}
+
+.skeleton-description {
+  height: 12px;
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: 4px;
+  margin-bottom: 10px;
+  width: 100%;
+}
+
+.skeleton-description:last-child {
+  width: 80%;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
 }
 
 /* Mobile styles (max-width: 1024px) */
@@ -596,6 +643,7 @@
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
     transition: all 0.3s ease;
   }
+
   .clients-section {
     margin-bottom: -5rem;
   }

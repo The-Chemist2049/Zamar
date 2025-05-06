@@ -77,12 +77,14 @@
 /* Mission-vision section */
 .mission-vision {
   background-color: #f9f9f9;
+  margin-top: -60px;
 }
 
 .mission-vision-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 2rem;
+  margin-top: -65px;
 }
 
 .mission-box,

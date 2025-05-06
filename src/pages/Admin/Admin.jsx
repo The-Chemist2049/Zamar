@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./Admin.css";
 import axios from "axios";
+import { services } from "../../data/Services";
 
 function Admin() {
   const [category, setCategory] = useState("Brand_Activations");
@@ -13,6 +14,8 @@ function Admin() {
     show: false,
     imageURL: null,
   });
+  const [selectedService, setSelectedService] = useState("");
+  const [serviceDescription, setServiceDescription] = useState("");
 
   const showSubcategory =
     category === "Brand_Activations" ||
@@ -38,10 +41,21 @@ function Admin() {
 
   const handleCategoryChange = (e) => {
     setCategory(e.target.value);
+    setSelectedService("");
+    setServiceDescription("");
   };
 
   const handleSubcategoryChange = (e) => {
     setSubcategory(e.target.value);
+  };
+
+  const handleServiceChange = (e) => {
+    const selectedTitle = e.target.value;
+    setSelectedService(selectedTitle);
+    const service = services.find((s) => s.title === selectedTitle);
+    if (service) {
+      setServiceDescription(service.description);
+    }
   };
 
   const handleImageChange = (e) => {
@@ -54,6 +68,8 @@ function Admin() {
     const fileInput = document.getElementById("image");
     if (fileInput) fileInput.value = "";
     setImage(null);
+    setSelectedService("");
+    setServiceDescription("");
   };
 
   const fetchImages = async () => {
@@ -61,16 +77,27 @@ function Admin() {
       const response = await axios.get(
         "https://zamarsolutions.co.ke/Zamar/api/get_images.php"
       );
-      const filtered = response.data.filter(
+      let filtered = response.data.filter(
         (img) =>
           img.category === category &&
           (!showSubcategory || img.subcategory === subcategory)
       );
+
+      if (category === "Services" && selectedService) {
+        filtered = filtered.filter((img) => img.title === selectedService);
+      }
+
       setUploadedImages(filtered);
     } catch (error) {
       console.error("Error fetching images:", error);
     }
   };
+
+  useEffect(() => {
+    if (category === "Services") {
+      fetchImages();
+    }
+  }, [selectedService]);
 
   const handleDelete = async (imageURL) => {
     setDeleteModal({ show: true, imageURL });
@@ -114,6 +141,10 @@ function Admin() {
       }
       if (image) {
         formData.append("image", image);
+      }
+      if (category === "Services") {
+        formData.append("title", selectedService);
+        formData.append("description", serviceDescription);
       }
 
       const response = await axios.post(
@@ -186,6 +217,8 @@ function Admin() {
             </option>
             <option value="Digital_Marketing">Digital Marketing</option>
             <option value="Client">New Client</option>
+            <option value="Services">Services</option>
+            <option value="ThreeD">ThreeD</option>
           </select>
         </div>
 
@@ -201,6 +234,39 @@ function Admin() {
               <option value="Outdoor">Outdoor</option>
             </select>
           </div>
+        )}
+
+        {category === "Services" && (
+          <>
+            <div className="form-group">
+              <label htmlFor="service">Select Service:</label>
+              <select
+                id="service"
+                value={selectedService}
+                onChange={handleServiceChange}
+                required
+              >
+                <option value="">Select a service</option>
+                {services.map((service, index) => (
+                  <option key={index} value={service.title}>
+                    {service.title}
+                  </option>
+                ))}
+              </select>
+            </div>
+            <div className="form-group">
+              <label htmlFor="description">Service Description:</label>
+              <textarea
+                id="description"
+                disabled
+                className="textarea"
+                value={serviceDescription}
+                onChange={(e) => setServiceDescription(e.target.value)}
+                required
+                rows="3"
+              />
+            </div>
+          </>
         )}
 
         <div className="form-group">

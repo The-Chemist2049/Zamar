@@ -7,12 +7,14 @@ import "../../index.css";
 import servicesImage from "../../assets/images/services.jpg";
 import ProcessStepCard from "../../components/Process/ProcessStepCard";
 import processSteps from "../../data/processSteps";
-import services from "../../data/Services";
 import processImage from "../../assets/images/process.jpg";
+import axios from "axios";
 
 const Services = () => {
   const navigate = useNavigate();
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [servicesimages, setServicesimages] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
   const carouselRef = useRef(null);
   const touchStartX = useRef(0);
   const touchEndX = useRef(0);
@@ -21,6 +23,28 @@ const Services = () => {
 
   const SLIDE_DURATION = 5000;
   const SWIPE_THRESHOLD = 50;
+  console.log("servicesimages", servicesimages);
+
+  useEffect(() => {
+    const fetchServices = async () => {
+      setIsLoading(true);
+      try {
+        const response = await axios.get(
+          "https://zamarsolutions.co.ke/Zamar/api/get_images.php"
+        );
+        const items = response.data;
+        const filteredServices = items.filter(
+          (item) => item.category === "Services"
+        );
+        setServicesimages(filteredServices);
+      } catch (error) {
+        console.error("Error fetching services:", error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+    fetchServices();
+  }, []);
 
   useEffect(() => {
     const updateIsMobile = () => {
@@ -34,27 +58,31 @@ const Services = () => {
   }, []);
 
   useEffect(() => {
-    if (!isMobile.current) return;
+    if (!isMobile.current || isLoading || servicesimages.length === 0) return;
 
     const startAutoSlide = () => {
       clearInterval(autoSlideIntervalRef.current);
       autoSlideIntervalRef.current = setInterval(() => {
-        setCurrentSlide((prev) => (prev + 1) % services.length);
+        setCurrentSlide((prev) => (prev + 1) % servicesimages.length);
       }, SLIDE_DURATION);
     };
 
     startAutoSlide();
 
     return () => clearInterval(autoSlideIntervalRef.current);
-  }, [services.length]);
+  }, [servicesimages.length, isLoading]);
 
   const goToPrevSlide = () => {
-    setCurrentSlide((prev) => (prev === 0 ? services.length - 1 : prev - 1));
+    if (servicesimages.length === 0) return;
+    setCurrentSlide((prev) =>
+      prev === 0 ? servicesimages.length - 1 : prev - 1
+    );
     resetAutoSlide();
   };
 
   const goToNextSlide = () => {
-    setCurrentSlide((prev) => (prev + 1) % services.length);
+    if (servicesimages.length === 0) return;
+    setCurrentSlide((prev) => (prev + 1) % servicesimages.length);
     resetAutoSlide();
   };
 
@@ -66,10 +94,10 @@ const Services = () => {
   };
 
   const resetAutoSlide = () => {
-    if (isMobile.current) {
+    if (isMobile.current && servicesimages.length > 0) {
       clearInterval(autoSlideIntervalRef.current);
       autoSlideIntervalRef.current = setInterval(() => {
-        setCurrentSlide((prev) => (prev + 1) % services.length);
+        setCurrentSlide((prev) => (prev + 1) % servicesimages.length);
       }, SLIDE_DURATION);
     }
   };
@@ -88,6 +116,35 @@ const Services = () => {
     if (Math.abs(delta) > SWIPE_THRESHOLD) {
       delta > 0 ? goToPrevSlide() : goToNextSlide();
     }
+  };
+
+  // Skeleton loader for service cards
+  const ServiceCardSkeleton = () => (
+    <div className="service-card-skeleton">
+      <div className="skeleton-image"></div>
+      <div className="skeleton-title"></div>
+      <div className="skeleton-description"></div>
+      <div className="skeleton-description"></div>
+    </div>
+  );
+
+  const renderSkeletons = (count) => {
+    return Array(count)
+      .fill(0)
+      .map((_, index) => (
+        <motion.div
+          key={`skeleton-${index}`}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{
+            duration: 0.5,
+            delay: index * 0.1,
+            ease: "easeInOut",
+          }}
+        >
+          <ServiceCardSkeleton />
+        </motion.div>
+      ));
   };
 
   return (
@@ -137,26 +194,28 @@ const Services = () => {
           <h2 className="section-title">Our Services</h2>
 
           <div className="services-grid desktop-grid">
-            {services.map((service, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{
-                  duration: 0.5,
-                  delay: index * 0.1,
-                  ease: "easeInOut",
-                }}
-              >
-                <ServiceCard
-                  image={service.image}
-                  icon={service.icon}
-                  title={service.title}
-                  description={service.description}
-                  className="service-card"
-                />
-              </motion.div>
-            ))}
+            {isLoading
+              ? renderSkeletons(6)
+              : servicesimages.map((service, index) => (
+                  <motion.div
+                    key={index}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{
+                      duration: 0.5,
+                      delay: index * 0.1,
+                      ease: "easeInOut",
+                    }}
+                  >
+                    <ServiceCard
+                      image={service.image_URL}
+                      icon={service.icon}
+                      title={service.title}
+                      description={service.description}
+                      className="service-card"
+                    />
+                  </motion.div>
+                ))}
           </div>
 
           <motion.div
@@ -173,66 +232,81 @@ const Services = () => {
                 transition: "transform 0.5s ease-in-out",
               }}
             >
-              {services.map((service, index) => (
+              {isLoading ? (
                 <motion.div
                   className="carousel-item"
-                  key={index}
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   transition={{ duration: 0.5, delay: 0.1 }}
                 >
-                  <ServiceCard
-                    icon={service.icon}
-                    image={service.image}
-                    className="service-card"
-                    title={service.title}
-                    description={service.description}
-                  />
+                  <ServiceCardSkeleton />
                 </motion.div>
-              ))}
+              ) : (
+                servicesimages.map((service, index) => (
+                  <motion.div
+                    className="carousel-item"
+                    key={index}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ duration: 0.5, delay: 0.1 }}
+                  >
+                    <ServiceCard
+                      icon={service.icon}
+                      image={service.image_URL}
+                      className="service-card"
+                      title={service.title}
+                      description={service.description}
+                    />
+                  </motion.div>
+                ))
+              )}
             </motion.div>
 
-            <div className="carousel-nav">
-              <button
-                className="carousel-prev"
-                onClick={goToPrevSlide}
-                aria-label="Previous slide"
-              >
-                &lt;
-              </button>
-              <button
-                className="carousel-next"
-                onClick={goToNextSlide}
-                aria-label="Next slide"
-              >
-                &gt;
-              </button>
-            </div>
+            {!isLoading && servicesimages.length > 0 && (
+              <>
+                <div className="carousel-nav">
+                  <button
+                    className="carousel-prev"
+                    onClick={goToPrevSlide}
+                    aria-label="Previous slide"
+                  >
+                    &lt;
+                  </button>
+                  <button
+                    className="carousel-next"
+                    onClick={goToNextSlide}
+                    aria-label="Next slide"
+                  >
+                    &gt;
+                  </button>
+                </div>
 
-            <div className="carousel-indicators">
-              {services.map((service, index) => (
-                <button
-                  key={index}
-                  className={`carousel-indicator ${
-                    index === currentSlide ? "active" : ""
-                  }`}
-                  onClick={() => goToSlide(index)}
-                  aria-label={`${service.title} - slide ${index + 1} of ${
-                    services.length
-                  }`}
-                  aria-current={index === currentSlide}
-                  title={service.title}
-                >
-                  <span className="indicator-label">{index + 1}</span>
-                </button>
-              ))}
-            </div>
+                <div className="carousel-indicators">
+                  {servicesimages.map((service, index) => (
+                    <button
+                      key={index}
+                      className={`carousel-indicator ${
+                        index === currentSlide ? "active" : ""
+                      }`}
+                      onClick={() => goToSlide(index)}
+                      aria-label={`${service.title} - slide ${index + 1} of ${
+                        servicesimages.length
+                      }`}
+                      aria-current={index === currentSlide}
+                      title={service.title}
+                    >
+                      <span className="indicator-label">{index + 1}</span>
+                    </button>
+                  ))}
+                </div>
 
-            <div className="carousel-slide-info">
-              <span className="current-slide">{currentSlide + 1}</span>
-              <span className="slide-divider">/</span>
-              <span className="total-slides">{services.length}</span>
-            </div>
+                <div className="carousel-slide-info">
+                  <span className="current-slide">{currentSlide + 1}</span>
+                  <span className="slide-divider">/</span>
+                  <span className="total-slides">{servicesimages.length}</span>
+                </div>
+              </>
+            )}
           </motion.div>
         </div>
       </motion.section>

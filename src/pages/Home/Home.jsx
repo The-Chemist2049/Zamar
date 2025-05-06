@@ -4,15 +4,11 @@ import { useStore } from "zustand/react";
 import DynamicContentStore from "../../libs/dynamic_content";
 import HeroSection from "../../components/HeroSection/HeroSection";
 import ServiceCard from "../../components/ServiceCard/ServiceCard";
-import TestimonialCard from "../../components/TestimonialCard/TestimonialCard";
-import { services } from "../../data/Services";
-import { testimonials } from "../../data/testimonials";
 import "./Home.css";
 import ValueCard from "../../components/CoreSection/ValueCard";
 import { Flex, Title } from "@mantine/core";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { motion } from "framer-motion";
 
 // Import icons for Why Choose Us section
 import expertiseIcon from "/icons/expertise.svg";
@@ -23,12 +19,36 @@ import supportIcon from "/icons/support.svg";
 const Home = () => {
   const navigate = useNavigate();
   const [clients, setClients] = React.useState([]);
-  const [loading, setLoading] = useState(true); // Add loading state
+  const [loading, setLoading] = useState(true); // Client loading state
+  const [servicesLoading, setServicesLoading] = useState(true); // Service loading state
   const [activeValueIndex, setActiveValueIndex] = useState(0);
   const [activeTestimonialIndex, setActiveTestimonialIndex] = useState(0);
   const valuesRowRef = useRef(null);
   const testimonialsSliderRef = useRef(null);
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+  const [servicesimages, setServicesimages] = useState([]);
+
+  // Fetch services images from the API
+  useEffect(() => {
+    const fetchServices = async () => {
+      setServicesLoading(true); // Set loading to true before fetching
+      try {
+        const response = await axios.get(
+          "https://zamarsolutions.co.ke/Zamar/api/get_images.php"
+        );
+        const items = response.data;
+        const filteredServices = items.filter(
+          (item) => item.category === "Services"
+        );
+        setServicesimages(filteredServices);
+        setServicesLoading(false); // Turn off loading when data is received
+      } catch (error) {
+        console.error("Error fetching services:", error);
+        setServicesLoading(false); // Turn off loading on error
+      }
+    };
+    fetchServices();
+  }, []);
 
   // Check if the screen is mobile
   useEffect(() => {
@@ -188,6 +208,20 @@ const Home = () => {
     </div>
   );
 
+  // Service Card Skeleton Component
+  const ServiceCardSkeleton = () => (
+    <div className="service-card-wrapper">
+      <div className="service-card skeleton-card">
+        <div className="skeleton-image"></div>
+        <div className="skeleton-content">
+          <div className="skeleton-title"></div>
+          <div className="skeleton-description"></div>
+          <div className="skeleton-description"></div>
+        </div>
+      </div>
+    </div>
+  );
+
   return (
     <>
       <HeroSection />
@@ -246,17 +280,27 @@ const Home = () => {
         <div className="container">
           <h2 className="section-title">Our Services</h2>
           <div className="services-grid1">
-            {services.slice(0, 3).map((service, index) => (
-              <div key={index} className="service-card-wrapper">
-                <ServiceCard
-                  image={service.image}
-                  icon={service.icon}
-                  title={service.title}
-                  description={service.description}
-                  className="service-card"
-                />
-              </div>
-            ))}
+            {servicesLoading ? (
+              // Show skeleton cards while loading
+              <>
+                <ServiceCardSkeleton />
+                <ServiceCardSkeleton />
+                <ServiceCardSkeleton />
+              </>
+            ) : (
+              // Show actual service cards when loaded
+              servicesimages.slice(0, 3).map((service, index) => (
+                <div key={index} className="service-card-wrapper">
+                  <ServiceCard
+                    image={service.image_URL}
+                    icon={service.icon}
+                    title={service.title}
+                    description={service.description}
+                    className="service-card"
+                  />
+                </div>
+              ))
+            )}
           </div>
           <div className="view-more-container">
             <button
