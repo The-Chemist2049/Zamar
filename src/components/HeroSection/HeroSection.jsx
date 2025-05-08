@@ -87,6 +87,7 @@ const HeroSection = () => {
                     src={image.image_URL}
                     alt={`3D image ${index + 1}`}
                     loading="eager"
+                    className="carousel-image"
                   />
                 ))}
               </div>

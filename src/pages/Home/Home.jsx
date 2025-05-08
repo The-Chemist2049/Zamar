@@ -312,6 +312,7 @@ const Home = () => {
           </div>
         </div>
       </section>
+      {/* Clients */}
       <section className="section clients-section">
         <div className="container">
           <h2 className="section-title">Our Clients</h2>

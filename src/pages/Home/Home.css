@@ -362,18 +362,20 @@
 }
 
 .client-logo {
-  margin: 0 8px;
+  background: #fff;
+  margin: 0 6px;
   padding: 0;
   height: 100px;
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 140px;
+  width: 180px;
 }
 
 .client-logo img {
+  max-width: 100%;
   border-radius: 10px;
-  width: 100%;
+  width: 90%;
   height: 100%;
   object-fit: fill;
 }
