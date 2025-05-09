@@ -2,7 +2,7 @@ import React from "react";
 import "../../index.css";
 import "./About.css";
 import aboutImage from "../../assets/images/nairobi.jpg";
-import aboutCompanyImage from "../../assets/images/company.jpg";
+import aboutCompanyImage from "../../assets/images/about.jpeg";
 import companyProfile from "../../assets/documents/company-profile.pdf";
 import impactImage from "../../assets/images/impact.jpg";
 import teamData from "../../data/teamData";

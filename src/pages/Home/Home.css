@@ -295,7 +295,7 @@
   align-items: center;
   justify-content: center;
   width: max-content;
-  animation: scroll 30s linear infinite;
+  animation: scroll 50s linear infinite;
   padding: 2rem 0;
 }
 
