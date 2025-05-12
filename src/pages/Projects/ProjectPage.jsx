@@ -32,7 +32,6 @@ export default function ProductPage() {
         const response = await axios.get(
           "https://zamarsolutions.co.ke/Zamar/api/get_images.php"
         );
-
         const grouped = {};
 
         categories.forEach((cat) => {
@@ -42,14 +41,17 @@ export default function ProductPage() {
               cat.subcategories.forEach((sub) => {
                 grouped[cat.name][sub] = [];
               });
-            } else {
-              grouped[cat.name]["main"] = [];
             }
+            // Ensure 'main' slot exists for each category
+            grouped[cat.name]["main"] = [];
           }
         });
 
         response.data.forEach((img) => {
-          const { category, subcategory = "main", image_URL } = img;
+          const category = img.category;
+          const subcategory = img.subcategory || "main";
+          const image_URL = img.image_URL;
+
           if (grouped[category]) {
             if (!grouped[category][subcategory]) {
               grouped[category][subcategory] = [];
@@ -70,14 +72,7 @@ export default function ProductPage() {
   }, []);
 
   useEffect(() => {
-    // Disable body scroll when popup is open
-    if (popupImage) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "auto";
-    }
-
-    // Cleanup function
+    document.body.style.overflow = popupImage ? "hidden" : "auto";
     return () => {
       document.body.style.overflow = "auto";
     };
@@ -248,7 +243,6 @@ export default function ProductPage() {
         )}
       </main>
 
-      {/* Image Popup */}
       {popupImage && (
         <div className="image-popup-overlay" onClick={closeImagePopup}>
           <div
